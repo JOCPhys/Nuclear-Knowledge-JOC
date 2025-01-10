@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Topic Page</title>
+</head>
+<body>
+    <h1>Topic Page</h1>
+    <ul>
+        {% for blog in blogs %}
+            <li><a href="{% url 'blog_page' blog.pk %}">{{ blog.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
