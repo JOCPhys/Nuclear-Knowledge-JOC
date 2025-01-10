@@ -11,25 +11,34 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 import sys
-sys.path.append(str(Path(__file__).resolve().parent.parent))  # Add the root directory to the system path
-from env import SECRET_KEY  # Import the SECRET_KEY from env.py
+import dj_database_url
+
+# Add the root directory to the system path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+# Import env to set environment variables
+if os.path.isfile('env.py'):
+    import env
+
+# Set the SECRET_KEY from environment variables
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_2a1ws2=6w9)t*)pgu*of99kqiln(!u#&bsw#&gwe+mndwkpis'
+# Remove the hardcoded SECRET_KEY
+# SECRET_KEY = 'django-insecure-_2a1ws2=6w9)t*)pgu*of99kqiln(!u#&bsw#&gwe+mndwkpis'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -40,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',  # Add the main app to the installed apps
 ]
 
 MIDDLEWARE = [
@@ -72,17 +82,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nuclear_knowledge.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -102,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -113,7 +123,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
