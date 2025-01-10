@@ -2,13 +2,29 @@
 <html>
 <head>
     <title>Topic Page</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Topic Page</h1>
-    <ul>
-        {% for blog in blogs %}
-            <li><a href="{% url 'blog_page' blog.pk %}">{{ blog.title }}</a></li>
-        {% endfor %}
-    </ul>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'landing_page' %}">Home</a></li>
+                <li><a href="{% url 'topic_page' %}">Topics</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Topic Page</h1>
+        <ul>
+            {% for blog in blogs %}
+                <li><a href="{% url 'blog_page' blog.pk %}">{{ blog.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2025 Nuclear Knowledge JOC</p>
+    </footer>
 </body>
 </html>
