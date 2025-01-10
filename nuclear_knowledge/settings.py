@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',  # Add the main app to the installed apps
+    'blog',  # Add the blog app to the installed apps
 ]
 
 MIDDLEWARE = [
