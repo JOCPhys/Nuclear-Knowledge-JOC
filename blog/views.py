@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login
+from allauth.account.forms import SignupForm
+from django.contrib.auth.views import LoginView
 from .models import Blog, Comment
 from .forms import BlogForm, CommentForm
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
 
 def landing_page(request):
     return render(request, 'landing_page.html')
@@ -45,3 +46,17 @@ def create_comment(request, pk):
     else:
         form = CommentForm()
     return render(request, 'create_comment.html', {'form': form})
+
+def register(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('landing_page')
+    else:
+        form = SignupForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
