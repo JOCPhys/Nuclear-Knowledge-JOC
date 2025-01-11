@@ -28,8 +28,8 @@
     <main>
         <h1>Topic Page</h1>
         <ul>
-            {% for blog in blogs %}
-                <li><a href="{% url 'blog_page' blog.pk %}">{{ blog.title }}</a></li>
+            {% for topic in topics %}
+                <li><a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a></li>
             {% endfor %}
         </ul>
     </main>

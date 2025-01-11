@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('', views.landing_page, name='landing_page'),
     path('topic/', views.topic_page, name='topic_page'),
-    path('blog/<int:pk>/', views.blog_page, name='blog_page'),
-    path('create_blog/', views.create_blog, name='create_blog'),
-    path('blog/<int:pk>/create_comment/', views.create_comment, name='create_comment'),
+    path('topic/<int:pk>/', views.topic_detail, name='topic_detail'),
+    path('create_topic/', views.create_topic, name='create_topic'),
+    path('topic/<int:pk>/create_comment/', views.create_comment, name='create_comment'),
 ]

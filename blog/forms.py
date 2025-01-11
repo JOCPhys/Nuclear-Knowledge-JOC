@@ -1,9 +1,9 @@
 from django import forms
-from .models import Blog, Comment
+from .models import Topic, Comment
 
-class BlogForm(forms.ModelForm):
+class TopicForm(forms.ModelForm):
     class Meta:
-        model = Blog
+        model = Topic
         fields = ['title', 'content', 'is_draft']
 
 class CommentForm(forms.ModelForm):

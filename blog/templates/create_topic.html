@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ blog.title }}</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Create Topic</title>
 </head>
 <body>
     <header>
@@ -26,14 +24,12 @@
         </nav>
     </header>
     <main>
-        <h1>{{ blog.title }}</h1>
-        <p>{{ blog.content }}</p>
-        <h2>Comments</h2>
-        <ul>
-            {% for comment in comments %}
-                <li>{{ comment.content }} - {{ comment.author.username }}</li>
-            {% endfor %}
-        </ul>
+        <h1>Create Topic</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
     </main>
     <footer>
         <p>&copy; 2025 Nuclear Knowledge JOC</p>
