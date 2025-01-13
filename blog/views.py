@@ -51,8 +51,9 @@ def register(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            user = form.save(request) # Save the user to the database
+            backend = 'allauth.account.auth_backends.AuthenticationBackend'
+            login(request, user, backend=backend)
             return redirect('landing_page')
     else:
         form = SignupForm()

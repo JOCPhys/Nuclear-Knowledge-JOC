@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'main',  # Add the main app to the installed apps
     'blog',  # Add the blog app to the installed apps
     'django.contrib.sites',  # Required by allauth
+    'django_summernote', # Add django_summernote to enhance admin panel
     'allauth',  # Add allauth
     'allauth.account',  # Add allauth account
     'allauth.socialaccount',  # Add allauth social account
