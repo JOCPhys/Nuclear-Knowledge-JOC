@@ -30,6 +30,7 @@
         <ul>
             {% for topic in topics %}
                 <li><a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a></li>
+                <p>{{ topic.content|safe }}</p>
             {% endfor %}
         </ul>
     </main>

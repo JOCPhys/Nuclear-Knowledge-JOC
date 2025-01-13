@@ -27,11 +27,11 @@
     </header>
     <main>
         <h1>{{ topic.title }}</h1>
-        <p>{{ topic.content }}</p>
+        <p>{{ topic.content|safe }}</p>
         <h2>Comments</h2>
         <ul>
             {% for comment in comments %}
-                <li>{{ comment.content }} - {{ comment.author.username }}</li>
+                <li>{{ comment.content|safe }} - {{ comment.author.username }}</li>
             {% endfor %}
         </ul>
     </main>
