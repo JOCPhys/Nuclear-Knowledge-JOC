@@ -4,7 +4,7 @@ from .models import Topic, Comment
 class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic
-        fields = ['title', 'content', 'is_draft']
+        fields = ['title', 'slug', 'content', 'excerpt', 'published']
 
 class CommentForm(forms.ModelForm):
     class Meta:

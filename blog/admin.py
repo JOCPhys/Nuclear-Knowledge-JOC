@@ -3,11 +3,11 @@ from .models import Topic, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Topic)
-class PostAdmin(SummernoteModelAdmin):
+class TopicAdmin(SummernoteModelAdmin):
 
-    list_display = ('title', 'slug', 'created_at', 'updated_at', 'is_draft')
+    list_display = ('title', 'slug', 'excerpt', 'created_at', 'updated_at', 'published')
     search_fields = ['title']
-    list_filter = ('is_draft',)
+    list_filter = ('published',)
     prepopulated_fields = {'slug': ('title',)}
     summernote_fields = ('content',)
     date_hierarchy = 'created_at'

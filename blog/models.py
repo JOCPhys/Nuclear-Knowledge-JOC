@@ -8,9 +8,10 @@ class Topic(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     content = models.TextField()
+    excerpt = models.TextField(blank=True, null=True)  # Add the excerpt field
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_draft = models.BooleanField(default=True)
+    published = models.BooleanField(default=False)  # Rename to published
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):

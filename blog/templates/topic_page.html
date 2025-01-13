@@ -29,7 +29,10 @@
         <h1>Topic Page</h1>
         <ul>
             {% for topic in topics %}
-                <li><a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a></li>
+                <li>
+                    <a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a>
+                    <p>{{ topic.excerpt|safe }}</p> <!-- Display the excerpt field -->
+                </li>
                 <p>{{ topic.content|safe }}</p>
             {% endfor %}
         </ul>

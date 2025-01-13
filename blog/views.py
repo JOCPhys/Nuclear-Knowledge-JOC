@@ -10,7 +10,7 @@ def landing_page(request):
     return render(request, 'landing_page.html')
 
 def topic_page(request):
-    topics = Topic.objects.filter(is_draft=False)
+    topics = Topic.objects.filter(published=True)
     return render(request, 'topic_page.html', {'topics': topics})
 
 @login_required
