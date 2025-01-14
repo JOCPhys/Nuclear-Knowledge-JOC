@@ -45,7 +45,7 @@
         <h2>Add a Comment</h2>
         <form method="post" class="mb-4">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.body }}
             <button type="submit" class="btn btn-primary">Add Comment</button>
         </form>
     </main>
