@@ -46,7 +46,8 @@
         <form method="post" class="mb-4">
             {% csrf_token %}
             {{ form.body }}
-            <button type="submit" class="btn btn-primary">Add Comment</button>
+            <button type="submit" class="btn btn-primary mt-2">Add Comment</button>
+            <button type="button" class="btn btn-secondary mt-2" onclick="window.history.back();">Return to Topic</button>
         </form>
     </main>
     <footer class="footer mt-auto py-3 bg-light">
