@@ -37,7 +37,7 @@
         <ul>
             {% for comment in comments %}
                 <li>
-                    <p>{{ comment.body|safe}}</p>
+                    <p>{{ comment.body|safe }}</p>
                     <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
                 </li>
             {% endfor %}
@@ -45,7 +45,7 @@
         <h2>Add a Comment</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.body }}
             <button type="submit">Add Comment</button>
         </form>
     </main>
