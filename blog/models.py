@@ -23,11 +23,12 @@ class Topic(models.Model):
         return self.title
 
 class Comment(models.Model):
-    content = models.TextField()
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self):
         return f'Comment by {self.author.username} on {self.topic.title}'

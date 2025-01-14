@@ -12,5 +12,10 @@ class TopicAdmin(SummernoteModelAdmin):
     summernote_fields = ('content',)
     date_hierarchy = 'created_at'
 
-# Register models to the admin site
-admin.site.register(Comment)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('topic', 'author', 'body', 'approved', 'created_at', 'updated_at')
+    search_fields = ['body']
+    list_filter = ('approved', 'created_at')
+    date_hierarchy = 'created_at'
