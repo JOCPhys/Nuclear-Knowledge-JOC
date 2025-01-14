@@ -11,7 +11,7 @@ class Topic(models.Model):
     excerpt = models.TextField(blank=True, null=True)  # Add the excerpt field
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published = models.BooleanField(default=False)  # Rename to published
+    published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):

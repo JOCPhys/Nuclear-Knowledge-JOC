@@ -1,0 +1,10 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+    <div class="admin-notifications">
+        <h2>Admin Notifications</h2>
+        <p>Unpublished Topics: {{ unpublished_count }}</p>
+        <p>Unapproved Comments: {{ unapproved_count }}</p>
+    </div>
+    {{ block.super }}
+{% endblock %}

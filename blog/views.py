@@ -6,6 +6,7 @@ from .models import Topic, Comment
 from .forms import TopicForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
+
 def landing_page(request):
     return render(request, 'landing_page.html')
 
@@ -28,6 +29,7 @@ def topic_detail(request, pk):
     else:
         form = CommentForm()
     return render(request, 'topic_detail.html', {'topic': topic, 'comments': comments, 'form': form})
+
 @login_required
 def create_topic(request):
     if request.method == 'POST':
