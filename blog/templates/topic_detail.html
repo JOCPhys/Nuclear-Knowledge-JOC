@@ -27,7 +27,12 @@
     </header>
     <main>
         <h1>{{ topic.title }}</h1>
-        <p>{{ topic.content|safe }}</p>
+        <ul>
+            {% for topic in topics %}
+                <li><a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a></li>
+                <p>{{ topic.content|safe }}</p>
+            {% endfor %}
+        </ul>
         <h2>Comments</h2>
         <ul>
             {% for comment in comments %}
