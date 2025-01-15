@@ -13,8 +13,10 @@
                 <li><a href="{% url 'topic_page' %}">Topics</a></li>
                 {% if user.is_authenticated %}
                     <li>
-                        <form method="post" action="{% url 'logout' %}">
+                        <form method="post" action="{% url 'logout' %}" id="logout-form">
                             {% csrf_token %}
+                            <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                        </form>                            {% csrf_token %}
                             <button type="submit">Logout</button>
                         </form>
                     </li>
