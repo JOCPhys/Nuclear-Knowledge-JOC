@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Topic Page</title>
+    <title>{{ topic.title }}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -26,25 +26,23 @@
             </ul>
         </nav>        
     </header>
-    <main class="container mt-4">
-        <h1 class="mb-4">Topic Page</h1>
-        <div class="row">
-            {% for topic in topics %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ topic.title }}</h5>
-                        <p class="card-text">{{ topic.excerpt|safe }}</p>
-                        <a href="{% url 'topic_detail' topic.pk %}" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-            {% if forloop.counter|divisibleby:3 %}
-        </div>
-        <div class="row">
-            {% endif %}
+    <main>
+        <h1>{{ topic.title }}</h1>
+        <p>{{ topic.content|safe }}</p>
+        <h2>Comments</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.body|safe }}</li>
+                <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
             {% endfor %}
-        </div>
+        </ul>
+        <h2>Add a Comment</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+            <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
+        </form>
     </main>
     <footer>
         <p>&copy; 2025 Nuclear Knowledge JOC</p>
