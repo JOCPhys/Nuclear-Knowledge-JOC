@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>{{ topic.title }}</title>
     {% load static %}
@@ -28,15 +28,15 @@
     </header>
     <main>
         <h1>{{ topic.title }}</h1>
-        <p>{{ topic.content|safe }}</p>
-        <h2>Comments</h2>
+        <h3>Comments</h3>
+        {{ topic.content|safe }}
         <ul>
             {% for comment in comments %}
                 <li>{{ comment.body|safe }}</li>
                 <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
             {% endfor %}
         </ul>
-        <h2>Add a Comment</h2>
+        <h5>Add a Comment</h5>
         <form method="post" class="mb-4">
             {% csrf_token %}
             <div class="form-group">
