@@ -1,60 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Topic Page</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'landing_page' %}">Home</a></li>
-                <li><a href="{% url 'topic_page' %}">Topics</a></li>
-                {% if user.is_authenticated %}
-                    <li>
-                        <form method="post" action="{% url 'logout' %}" id="logout-form">
-                            {% csrf_token %}
-                            <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-                {% endif %}
-            </ul>
-        </nav>        
-    </header>
-    <main class="container-fluid mt-4">
-        <h1 class="mb-4">Topic Page 1</h1>
-        <div class="row">
-            <div class="col-12 mt-3 left">
-                <div class="row">
-                    {% for topic in topics %}
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ topic.title }}</h5>
-                                <p class="card-text">{{ topic.excerpt|safe }}</p>
-                                <a href="{% url 'topic_detail' topic.pk %}" class="btn btn-primary">Read More</a>
-                            </div>
+{% extends "base.html" %}
+
+{% block title %}Topic Page{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                {% for topic in topics %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ topic.image.url }}" class="card-img-top" alt="{{ topic.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ topic.title }}</h5>
+                            <p class="card-text">{{ topic.excerpt }}</p>
+                            <p class="card-text"><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
+                            <p class="card-text"><small class="text-muted">{{ topic.comments.count }} comments</small></p>
+                            <a href="{% url 'topic_detail' topic.pk %}" class="btn btn-primary">Read More</a>
+                            <button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
+                                {% if user in topic.likes.all %}
+                                    Unlike
+                                {% else %}
+                                    Like
+                                {% endif %}
+                            </button>
                         </div>
                     </div>
-                    {% if forloop.counter|divisibleby:3 %}
                 </div>
-                <div class="row">
-                    {% endif %}
-                    {% endfor %}
-                </div>
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2025 Nuclear Knowledge JOC</p>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

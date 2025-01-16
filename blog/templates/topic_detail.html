@@ -1,66 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>{{ topic.title }}</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'landing_page' %}">Home</a></li>
-                <li><a href="{% url 'topic_page' %}">Topics</a></li>
-                {% if user.is_authenticated %}
-                    <li>
-                        <form method="post" action="{% url 'logout' %}" id="logout-form">
-                            {% csrf_token %}
-                            <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-                {% endif %}
-            </ul>
-        </nav>        
-    </header>
-    <main>
-        <h1>{{ topic.title }}</h1>
-        <h3>Comments</h3>
-        {{ topic.content|safe }}
-        <ul>
-            {% for comment in comments %}
-            <li>
-                <p>{{ comment.body|safe }}</p>
-                <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
-                {% if comment.author == user %}
-                    <form method="post" action="{% url 'delete_comment' comment.pk %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                {% endif %}
-            </li>                
-            {% endfor %}
-        </ul>
-        <h5>Add a Comment</h5>
-        <form method="post" class="mb-4">
-            {% csrf_token %}
-            <div class="form-group">
-                {{ form.body }}
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Add Comment</button>
-                <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
-            </div>
-        </form>
-    </main>
-    <footer>
-        <p>&copy; 2025 Nuclear Knowledge JOC</p>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ topic.title }}</h1>
+<p>{{ topic.content|safe }}</p>
+<p><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
+<p><small class="text-muted">{{ topic.comments.count }} comments</small></p>
+<button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
+    {% if user in topic.likes.all %}
+        Unlike
+    {% else %}
+        Like
+    {% endif %}
+</button>
+<h3>Comments</h3>
+<ul>
+    {% for comment in comments %}
+    <li>
+        <p>{{ comment.body|safe }}</p>
+        <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
+        {% if comment.author == user %}
+            <form method="post" action="{% url 'delete_comment' comment.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        {% endif %}
+    </li>                
+    {% endfor %}
+</ul>
+<h5>Add a Comment</h5>
+<form method="post" class="mb-4">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.body }}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+        <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
+    </div>
+</form>
+{% endblock %}

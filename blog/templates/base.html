@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Nuclear Knowledge JOC{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'landing_page' %}">Nuclear Knowledge JOC</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'landing_page' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'topic_page' %}">Topics</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <form method="post" action="{% url 'logout' %}" class="form-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-link nav-link">Logout</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">&copy; 2025 Nuclear Knowledge JOC</span>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <!--Javascript for like button-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeButtons = document.querySelectorAll('.like-button');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const topicId = this.getAttribute('data-topic-id');
+                    fetch(`/like/${topicId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ topic_id: topicId })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.liked) {
+                            this.textContent = 'Unlike';
+                        } else {
+                            this.textContent = 'Like';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
