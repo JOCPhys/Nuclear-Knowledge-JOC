@@ -14,6 +14,8 @@ class Topic(models.Model):
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
+    image = models.ImageField(upload_to='topic_images/', blank=True, null=True)
+
 
     def save(self, *args, **kwargs):
         if not self.slug:

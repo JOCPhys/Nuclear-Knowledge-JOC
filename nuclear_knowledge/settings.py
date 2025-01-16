@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'allauth',  # Add allauth
     'allauth.account',  # Add allauth account
     'allauth.socialaccount',  # Add allauth social account
+    'cloudinary',  # Add cloudinary
+    'cloudinary_storage',  # Add cloudinary_storage
 ]
 
 SITE_ID = 1
@@ -157,11 +159,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Cloudinary configuration
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = '/'
