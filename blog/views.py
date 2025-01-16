@@ -5,6 +5,8 @@ from django.contrib.auth.views import LoginView
 from .models import Topic, Comment
 from .forms import TopicForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 def landing_page(request):
@@ -65,6 +67,20 @@ def delete_comment(request, pk):
         comment.delete()
         return redirect('topic_detail', pk=comment.topic.pk)
     return render(request, 'topic_detail.html', {'topic': comment.topic})
+
+""" views the like/unlike requests """
+@login_required 
+@require_POST
+def like_topic(request, pk):
+    topic = get_object_or_404(Topic, pk=pk)
+    if request.user in topic.likes.all():
+        topic.likes.remove(request.user)
+        liked = False
+    else:
+        topic.likes.add(request.user)
+        liked = True
+    like_count = topic.likes.count()
+    return JsonResponse({'liked': liked, 'like_count': like_count})
 
 def register(request):
     if request.method == 'POST':
