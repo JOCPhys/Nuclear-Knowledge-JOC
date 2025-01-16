@@ -13,6 +13,7 @@ class Topic(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

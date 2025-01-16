@@ -8,13 +8,19 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
-
 def landing_page(request):
     return render(request, 'landing_page.html')
 
 def topic_page(request):
     topics = Topic.objects.filter(published=True)
-    return render(request, 'topic_page.html', {'topics': topics})
+    topics_with_likes = [
+        {
+            'topic': topic,
+            'like_count': topic.likes.count()
+        }
+        for topic in topics
+    ]
+    return render(request, 'topic_page.html', {'topics_with_likes': topics_with_likes})
 
 @login_required
 def topic_detail(request, pk):
@@ -30,7 +36,12 @@ def topic_detail(request, pk):
             return redirect('topic_detail', pk=pk)
     else:
         form = CommentForm()
-    return render(request, 'topic_detail.html', {'topic': topic, 'comments': comments, 'form': form})
+    return render(request, 'topic_detail.html', {
+        'topic': topic,
+        'comments': comments,
+        'form': form,
+        'like_count': topic.likes.count()  # Pass the like count to the template
+    })
 
 @login_required
 def create_topic(request):

@@ -1,1 +1,1 @@
-web: gunicorn nuclear_knowledge.wsgi --log-file -
+web: gunicorn nuclear_knowledge.wsgi:application --log-file -
