@@ -68,6 +68,8 @@
                         } else {
                             this.textContent = 'Like';
                         }
+                        const likeCountElement = document.querySelector(`#like-count-${topicId}`);
+                        likeCountElement.textContent = `${data.like_count} likes`;
                     });
                 });
             });

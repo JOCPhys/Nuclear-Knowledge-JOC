@@ -7,6 +7,7 @@
 <p>{{ topic.content|safe }}</p>
 <p><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
 <p><small class="text-muted">{{ topic.comments.count }} comments</small></p>
+<p class="card-text" id="like-count-{{ topic.pk }}"><small class="text-muted">{{ like_count }} likes</small></p>
 <button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
     {% if user in topic.likes.all %}
         Unlike
