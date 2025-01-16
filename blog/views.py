@@ -17,7 +17,7 @@ def topic_page(request):
 @login_required
 def topic_detail(request, pk):
     topic = get_object_or_404(Topic, pk=pk)
-    comments = topic.comments.filter(approved=True)
+    comments = Comment.objects.filter(topic=topic)  # Ensure all comments related to the topic are fetched
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -57,6 +57,14 @@ def create_comment(request, pk):
     else:
         form = CommentForm()
     return render(request, 'create_comment.html', {'form': form})
+
+@login_required
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST' and comment.author == request.user:
+        comment.delete()
+        return redirect('topic_detail', pk=comment.topic.pk)
+    return render(request, 'topic_detail.html', {'topic': comment.topic})
 
 def register(request):
     if request.method == 'POST':

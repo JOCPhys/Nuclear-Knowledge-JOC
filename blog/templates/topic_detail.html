@@ -32,8 +32,16 @@
         {{ topic.content|safe }}
         <ul>
             {% for comment in comments %}
-                <li>{{ comment.body|safe }}</li>
+            <li>
+                <p>{{ comment.body|safe }}</p>
                 <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
+                {% if comment.author == user %}
+                    <form method="post" action="{% url 'delete_comment' comment.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                {% endif %}
+            </li>                
             {% endfor %}
         </ul>
         <h5>Add a Comment</h5>
