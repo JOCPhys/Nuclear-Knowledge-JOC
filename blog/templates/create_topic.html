@@ -1,38 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Create Topic</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'landing_page' %}">Home</a></li>
-                <li><a href="{% url 'topic_page' %}">Topics</a></li>
-                {% if user.is_authenticated %}
-                    <li>
-                        <form method="post" action="{% url 'logout' %}" id="logout-form">
-                            {% csrf_token %}
-                            <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h1>Create Topic</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
-        </form>
-    </main>
-    <footer>
-        <p>&copy; 2025 Nuclear Knowledge JOC</p>
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Create Topic{% endblock %}
+
+{% block content %}
+<h1>Create Topic</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleInput = document.querySelector('#id_title');
+        const slugInput = document.querySelector('#id_slug');
+
+        titleInput.addEventListener('input', function() {
+            const slug = titleInput.value
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)+/g, '');
+            slugInput.value = slug;
+        });
+    });
+</script>
+{% endblock %}

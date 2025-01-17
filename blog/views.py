@@ -46,7 +46,7 @@ def topic_detail(request, pk):
 @login_required
 def create_topic(request):
     if request.method == 'POST':
-        form = TopicForm(request.POST)
+        form = TopicForm(request.POST, request.FILES)
         if form.is_valid():
             topic = form.save(commit=False)
             topic.author = request.user

@@ -16,10 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blog import views  
 
 urlpatterns = [
     path('accounts/', include('allauth.urls')),  # Include allauth URLs
     path('admin/', admin.site.urls),
+    path('create_topic/', views.create_topic, name='create_topic'),
     path('summernote/', include('django_summernote.urls')),
+    path('topic/', views.topic_page, name='topic_page'),
+    path('topic/<int:pk>/', views.topic_detail, name='topic_detail'),
     path('', include('blog.urls')), # Include the blog app's urls
 ]

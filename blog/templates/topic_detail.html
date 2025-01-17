@@ -4,6 +4,11 @@
 
 {% block content %}
 <h1>{{ topic.title }}</h1>
+{% if topic.image %}
+    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-fluid">
+{% else %}
+    <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="img-fluid">
+{% endif %}
 <p>{{ topic.content|safe }}</p>
 <p><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
 <p><small class="text-muted">{{ topic.comments.count }} comments</small></p>

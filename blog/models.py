@@ -15,7 +15,7 @@ class Topic(models.Model):
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
-    image = CloudinaryField('image', blank=True, null=True)  # Use CloudinaryField for image
+    image = CloudinaryField('image', blank=True, null=True, default='placeholder.png')
 
 
     def save(self, *args, **kwargs):
