@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -14,7 +15,7 @@ class Topic(models.Model):
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
-    image = models.ImageField(upload_to='topic_images/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)  # Use CloudinaryField for image
 
 
     def save(self, *args, **kwargs):
