@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Landing Page</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'landing_page' %}">Home</a></li>
-                <li><a href="{% url 'topic_page' %}">Topics</a></li>
-                {% if user.is_authenticated %}
-                    <li>
-                        <form method="post" action="{% url 'logout' %}" id="logout-form">
-                            {% csrf_token %}
-                            <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-                    {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h1>Welcome to the Landing Page</h1>
-    </main>
-    <footer>
-        <p>&copy; 2025 Nuclear Knowledge JOC</p>
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Landing Page{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Landing Page</h1>
+{% endblock %}
