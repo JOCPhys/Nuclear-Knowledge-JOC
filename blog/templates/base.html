@@ -65,9 +65,9 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.liked) {
-                            this.textContent = 'Unlike';
+                            this.innerHTML = '<i class="fas fa-thumbs-up"></i> Unlike';
                         } else {
-                            this.textContent = 'Like';
+                            this.innerHTML = '<i class="fas fa-thumbs-up"></i> Like';
                         }
                         const likeCountElement = document.querySelector(`#like-count-${topicId}`);
                         likeCountElement.textContent = `${data.like_count} likes`;

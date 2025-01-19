@@ -6,7 +6,7 @@
 {% block content %}
 <h1>{{ topic.title }}</h1>
 {% if topic.image %}
-    <img src="{{ topic.image.url }}" alt="{{ topic.alt_dfescription }}" class="img-fluid w-50">
+    <img src="{{ topic.image.url }}" alt="{{ topic.alt_description }}" class="img-fluid w-50">
 {% else %}
     <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="img-fluid w-50">
 {% endif %}
@@ -15,6 +15,7 @@
 <p><small class="text-muted">{{ topic.comments.count }} comments</small></p>
 <p class="card-text" id="like-count-{{ topic.pk }}"><small class="text-muted">{{ like_count }} likes</small></p>
 <button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
+    <i class="fas fa-thumbs-up"></i>
     {% if user in topic.likes.all %}
         Unlike
     {% else %}

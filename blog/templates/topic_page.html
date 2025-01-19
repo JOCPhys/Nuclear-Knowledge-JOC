@@ -24,6 +24,7 @@
                             <p class="card-text" id="like-count-{{ item.topic.pk }}"><small class="text-muted">{{ item.like_count }} likes</small></p>
                             <a href="{% url 'topic_detail' item.topic.pk %}" class="btn btn-primary">Read More</a>
                             <button class="btn btn-outline-primary like-button" data-topic-id="{{ item.topic.pk }}">
+                                <i class="fas fa-thumbs-up"></i>
                                 {% if user in item.topic.likes.all %}
                                     Unlike
                                 {% else %}
