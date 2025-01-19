@@ -6,7 +6,7 @@
 {% block content %}
 <h1>{{ topic.title }}</h1>
 {% if topic.image %}
-    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-fluid w-50">
+    <img src="{{ topic.image.url }}" alt="{{ topic.alt_dfescription }}" class="img-fluid w-50">
 {% else %}
     <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="img-fluid w-50">
 {% endif %}
