@@ -184,6 +184,15 @@
         window.addEventListener('pageshow', (event) => updateCounter(actionCheckboxes, options));
     };
 
+    // Function to set the default view 
+    function setDefaultView() {
+        // Simulate a click on the 'show counts' link
+        const showCountsLink = document.querySelector('.filter-spec a.show-counts');
+        if (showCountsLink) {
+            showCountsLink.click();
+        }
+    }
+
     // Call function fn when the DOM is loaded and ready. If it is already
     // loaded, call the function now.
     // http://youmightnotneedjquery.com/#ready
@@ -200,5 +209,7 @@
         if (actionsEls.length > 0) {
             Actions(actionsEls);
         }
+        // Set the default view when the DOM is ready
+        setDefaultView();
     });
 }
