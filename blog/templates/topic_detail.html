@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ topic.title }}{% endblock %}
 
 {% block content %}
 <h1>{{ topic.title }}</h1>
 {% if topic.image %}
-    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-fluid">
+    <img src="{{ topic.image.url }}" alt="{{ topic.title }}" class="img-fluid w-50">
 {% else %}
-    <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="img-fluid">
+    <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="img-fluid w-50">
 {% endif %}
 <p>{{ topic.content|safe }}</p>
 <p><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
