@@ -14,14 +14,17 @@
 <p><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
 <p><small class="text-muted">{{ topic.comments.count }} comments</small></p>
 <p class="card-text" id="like-count-{{ topic.pk }}"><small class="text-muted">{{ like_count }} likes</small></p>
-<button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
-    <i class="fas fa-thumbs-up"></i>
-    {% if user in topic.likes.all %}
-        Unlike
-    {% else %}
-        Like
-    {% endif %}
-</button>
+<div class="d-flex justify-content-between">
+    <button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
+        <i class="fas fa-thumbs-up"></i>
+        {% if user in topic.likes.all %}
+            Unlike
+        {% else %}
+            Like
+        {% endif %}
+    </button>
+    <a href="{% url 'topic_detail' topic.pk %}" class="btn btn-primary">Read More</a>
+</div>
 <h3>Comments</h3>
 <ul>
     {% for comment in comments %}
