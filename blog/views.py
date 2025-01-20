@@ -25,7 +25,7 @@ def topic_page(request):
 @login_required
 def topic_detail(request, pk):
     topic = get_object_or_404(Topic, pk=pk)
-    comments = Comment.objects.filter(topic=topic)  # Ensure all comments related to the topic are fetched
+    comments = Comment.objects.filter(topic=topic, parent__isnull=True)  # Fetch only top-level comments
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():

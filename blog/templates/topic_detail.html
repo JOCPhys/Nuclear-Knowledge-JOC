@@ -38,18 +38,30 @@
                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
         {% endif %}
+        <a href="#" class="btn btn-sm btn-secondary reply-button" data-comment-id="{{ comment.pk }}">Reply</a>
+        <ul>
+            {% for reply in comment.replies.all %}
+            <li>
+                <p>{{ reply.body|safe }}</p>
+                <p>By {{ reply.author.username }} on {{ reply.created_at }}</p>
+                {% if reply.author == user %}
+                    <a href="{% url 'edit_comment' reply.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <form method="post" action="{% url 'delete_comment' reply.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
     </li>
     {% endfor %}
 </ul>
 <h5>Add a Comment</h5>
 <form method="post" class="mb-4">
     {% csrf_token %}
-    <div class="form-group">
-        {{ form.body }}
-    </div>
-    <div class="form-group">
+        {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Add Comment</button>
         <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
-    </div>
 </form>
 {% endblock %}
