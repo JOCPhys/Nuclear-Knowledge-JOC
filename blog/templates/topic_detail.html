@@ -39,9 +39,9 @@
             </form>
         {% endif %}
         <a href="#" class="btn btn-sm btn-secondary reply-button" data-comment-id="{{ comment.pk }}">Reply</a>
-        <ul>
+        <ul class="reply-list">
             {% for reply in comment.replies.all %}
-            <li>
+            <li class="reply">
                 <p>{{ reply.body|safe }}</p>
                 <p>By {{ reply.author.username }} on {{ reply.created_at }}</p>
                 {% if reply.author == user %}
@@ -60,8 +60,8 @@
 <h5>Add a Comment</h5>
 <form method="post" class="mb-4">
     {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Add Comment</button>
-        <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Comment</button>
+    <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
 </form>
 {% endblock %}

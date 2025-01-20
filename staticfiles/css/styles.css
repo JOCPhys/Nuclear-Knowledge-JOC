@@ -50,3 +50,25 @@ footer {
 .d-flex.justify-content-start .btn {
     margin-right: 10px;
 }
+
+.comment-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.comment {
+    margin-bottom: 20px;
+}
+
+.reply-list {
+    list-style-type: none;
+    padding-left: 20px; /* Indent replies */
+}
+
+.reply {
+    margin-bottom: 10px;
+}
+
+.reply-button {
+    margin-top: 10px;
+}
