@@ -62,13 +62,10 @@ footer {
 
 .reply-list {
     list-style-type: none;
-    padding-left: 20px; /* Indent replies */
+    padding-left: 40px; /* Indent replies */
 }
 
 .reply {
     margin-bottom: 10px;
 }
 
-.reply-button {
-    margin-top: 10px;
-}
