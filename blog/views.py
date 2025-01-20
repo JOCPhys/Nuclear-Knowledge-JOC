@@ -79,6 +79,22 @@ def delete_comment(request, pk):
         return redirect('topic_detail', pk=comment.topic.pk)
     return render(request, 'topic_detail.html', {'topic': comment.topic})
 
+@login_required
+def edit_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.user != comment.author:
+        return redirect('topic_detail', pk=comment.topic.pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('topic_detail', pk=comment.topic.pk)
+    else:
+        form = CommentForm(instance=comment)
+
+    return render(request, 'blog/edit_comment.html', {'form': form, 'comment': comment})
+
 """ views the like/unlike requests """
 @login_required 
 @require_POST
