@@ -25,13 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add event listener for Enter/Return key when editing a reply
+    // Add event listener for Enter/Return key when editing a comment or reply
     const editButtons = document.querySelectorAll('.comment-button.edit');
     editButtons.forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const editForm = this.nextElementSibling;
-            if (editForm.tagName === 'FORM') {
+            if (editForm && editForm.tagName === 'FORM') {
                 const textarea = editForm.querySelector('textarea');
                 textarea.addEventListener('keydown', function(event) {
                     if (event.key === 'Enter' && !event.shiftKey) {
@@ -42,4 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Add event listener for Enter/Return key when adding a comment
+    const addCommentForm = document.querySelector('form.mb-4');
+    if (addCommentForm) {
+        const textarea = addCommentForm.querySelector('textarea');
+        textarea.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                addCommentForm.submit();
+            }
+        });
+    }
 });
+

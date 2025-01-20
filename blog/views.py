@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from allauth.account.forms import SignupForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from .models import Topic, Comment
 from .forms import TopicForm, CommentForm
 from django.contrib.auth.decorators import login_required

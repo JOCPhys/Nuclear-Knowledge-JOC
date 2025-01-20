@@ -16,7 +16,7 @@
     <p><small class="text-muted">{{ topic.comments.count }} comments</small></p>
     <p class="card-text" id="like-count-{{ topic.pk }}"><small class="text-muted">{{ like_count }} likes</small></p>
     <div class="d-flex justify-content-start">
-        <button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
+        <button class="btn btn-outline-primary like-button mb-6" data-topic-id="{{ topic.pk }}">
             <i class="fas fa-thumbs-up"></i>
             {% if user in topic.likes.all %}
                 Unlike
@@ -24,33 +24,47 @@
                 Like
             {% endif %}
         </button>
-        <a href="{% url 'topic_detail' topic.pk %}" class="btn btn-primary ml-2">Read More</a>
+        <a href="{% url 'topic_detail' topic.pk %}" class="btn btn-primary mb-6">Read More</a>
     </div>
+    <br>
+    <h5>Add a Comment</h5>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        {{ form.body }}
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+            <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
+        </div>
+    </form>
     <h3>Comments</h3>
-    <ul class="comment-list">
+    <ul class="comment-list list-unstyled">
         {% for comment in comments %}
-        <li class="comment">
+        <li class="comment mb-3">
             <p>{{ comment.body|safe }}</p>
             <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
             {% if comment.author == user %}
+            <div class="comment-buttons">            
                 <a href="{% url 'edit_comment' comment.pk %}" class="comment-button edit">Edit</a>
                 <form method="post" action="{% url 'delete_comment' comment.pk %}" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" class="comment-button delete">Delete</button>
                 </form>
-            {% endif %}
-            <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
-            <ul class="reply-list">
+                {% endif %}
+                <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
+            </div>
+            <ul class="reply-list list-unstyled ml-4">
                 {% for reply in comment.ordered_replies %}
-                <li class="reply">
+                <li class="reply mb-2">
                     <p>{{ reply.body|safe }}</p>
                     <p>By {{ reply.author.username }} on {{ reply.created_at }}</p>
                     {% if reply.author == user %}
-                        <a href="{% url 'edit_comment' reply.pk %}" class="comment-button edit">Edit</a>
-                        <form method="post" action="{% url 'delete_comment' reply.pk %}" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="comment-button delete">Delete</button>
-                        </form>
+                        <div class="comment-buttons">
+                            <a href="{% url 'edit_comment' reply.pk %}" class="comment-button edit">Edit</a>
+                            <form method="post" action="{% url 'delete_comment' reply.pk %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="comment-button delete">Delete</button>
+                            </form>
+                        </div>
                     {% endif %}
                 </li>
                 {% endfor %}
@@ -58,12 +72,6 @@
         </li>
         {% endfor %}
     </ul>
-    <h5>Add a Comment</h5>
-    <form method="post" class="mb-4">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Add Comment</button>
-        <a href="{% url 'topic_page' %}" class="btn btn-secondary">Return to Topics</a>
-    </form>
+
 </div>
 {% endblock %}

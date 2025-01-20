@@ -32,17 +32,9 @@ class TopicAdmin(SummernoteModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'author', 'body', 'approved', 'created_at', 'updated_at')
+    list_display = ('topic', 'author', 'body', 'created_at', 'updated_at')
     search_fields = ['body']
-    list_filter = ('approved', 'created_at')
+    list_filter = ('created_at',)
     date_hierarchy = 'created_at'
-    actions = ['approve_comments']
 
-    def approve_comments(self, request, queryset):
-        queryset.update(approved=True)
-    approve_comments.short_description = "Approve selected comments"
-
-    def changelist_view(self, request, extra_context=None):
-        extra_context = extra_context or {}
-        extra_context['unapproved_count'] = Comment.objects.filter(approved=False).count()
-        return super().changelist_view(request, extra_context=extra_context)
+    
