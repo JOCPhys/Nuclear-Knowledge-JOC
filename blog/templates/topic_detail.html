@@ -32,23 +32,23 @@
         <p>{{ comment.body|safe }}</p>
         <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
         {% if comment.author == user %}
-            <a href="{% url 'edit_comment' comment.pk %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'edit_comment' comment.pk %}" class="comment-button edit">Edit</a>
             <form method="post" action="{% url 'delete_comment' comment.pk %}" style="display:inline;">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                <button type="submit" class="comment-button delete">Delete</button>
             </form>
         {% endif %}
-        <a href="#" class="btn btn-sm btn-secondary reply-button" data-comment-id="{{ comment.pk }}">Reply</a>
+        <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
         <ul class="reply-list">
             {% for reply in comment.replies.all %}
             <li class="reply">
                 <p>{{ reply.body|safe }}</p>
                 <p>By {{ reply.author.username }} on {{ reply.created_at }}</p>
                 {% if reply.author == user %}
-                    <a href="{% url 'edit_comment' reply.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'edit_comment' reply.pk %}" class="comment-button edit">Edit</a>
                     <form method="post" action="{% url 'delete_comment' reply.pk %}" style="display:inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="submit" class="comment-button delete">Delete</button>
                     </form>
                 {% endif %}
             </li>
