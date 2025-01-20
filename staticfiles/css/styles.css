@@ -69,3 +69,32 @@ footer {
     margin-bottom: 10px;
 }
 
+/* General button styles for comments */
+.comment-button {
+    color: #005eff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0 10px 0 0;
+    text-decoration: none;
+}
+
+.comment-button:hover {
+    color: grey; /* Change to secondary color on hover */
+    text-decoration: none;
+}
+
+/* Specific styles for different buttons if needed */
+.comment-button.edit {
+    /* Additional styles for edit button if needed */
+}
+
+.comment-button.delete {
+    /* Additional styles for delete button if needed */
+}
+
+.comment-button.reply {
+    /* Additional styles for reply button if needed */
+}

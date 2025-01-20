@@ -40,7 +40,7 @@
         {% endif %}
         <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
         <ul class="reply-list">
-            {% for reply in comment.replies.all %}
+            {% for reply in comment.ordered_replies %}
             <li class="reply">
                 <p>{{ reply.body|safe }}</p>
                 <p>By {{ reply.author.username }} on {{ reply.created_at }}</p>

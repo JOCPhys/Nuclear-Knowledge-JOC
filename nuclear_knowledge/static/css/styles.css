@@ -71,7 +71,7 @@ footer {
 
 /* General button styles for comments */
 .comment-button {
-    color: blue;
+    color: #005eff;
     background: transparent;
     border: none;
     cursor: pointer;

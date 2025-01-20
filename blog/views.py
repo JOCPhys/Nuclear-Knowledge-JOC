@@ -36,6 +36,9 @@ def topic_detail(request, pk):
             return redirect('topic_detail', pk=pk)
     else:
         form = CommentForm()
+    # Order replies for each comment
+    for comment in comments:
+        comment.ordered_replies = comment.replies.all().order_by('created_at')
     return render(request, 'topic_detail.html', {
         'topic': topic,
         'comments': comments,
