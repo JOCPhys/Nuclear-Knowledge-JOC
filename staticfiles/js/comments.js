@@ -24,4 +24,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    // Add event listener for Enter/Return key when editing a reply
+    const editButtons = document.querySelectorAll('.comment-button.edit');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            const editForm = this.nextElementSibling;
+            if (editForm.tagName === 'FORM') {
+                const textarea = editForm.querySelector('textarea');
+                textarea.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' && !event.shiftKey) {
+                        event.preventDefault();
+                        editForm.submit();
+                    }
+                });
+            }
+        });
+    });
 });
