@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <button type="submit" class="btn btn-primary mt-2">Reply</button>
             `;
             this.parentElement.appendChild(replyForm);
+
+            // Add event listener for Enter/Return key
+            replyForm.querySelector('textarea').addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    replyForm.submit();
+                }
+            });
         });
     });
 });
