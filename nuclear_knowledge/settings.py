@@ -40,6 +40,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com', 'nuclear-knowledge-joc.herokuapp.com', '*']
 
+CSRF_TRUSTED_ORIGINS = ['https://8000-jocphys-nuclearknowledg-k332bmo63z4.ws.codeinstitute-ide.net']
 # Application definition
 
 INSTALLED_APPS = [
@@ -152,7 +153,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'nuclear_knowledge/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (Uploaded by users)

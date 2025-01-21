@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from allauth.account.forms import SignupForm
@@ -84,7 +85,14 @@ def delete_comment(request, pk):
 
 @login_required
 def edit_comment(request, pk):
+    ### remember to remove this print command line after debugging ###
+    print(f"Edit comment view called with pk: {pk}")  # Add this line
     comment = get_object_or_404(Comment, pk=pk)
+    ### remember to remove line after checking console log for URL ###
+    print(f"Edit comment URL: {reverse('edit_comment', args=[pk])}")
+    ### remember to remove line after checking console log for URL ###
+    print(f"Comment found: {comment}")
+    
     if request.user != comment.author:
         return redirect('topic_detail', pk=comment.topic.pk)
 

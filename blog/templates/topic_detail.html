@@ -15,7 +15,7 @@
     <p><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
     <p><small class="text-muted">{{ topic.comments.count }} comments</small></p>
     <p class="card-text" id="like-count-{{ topic.pk }}"><small class="text-muted">{{ like_count }} likes</small></p>
-    <div class="d-flex justify-content-start">
+    <div class="d-flex justify-content-start mb-3">
         <button class="btn btn-outline-primary like-button mb-6" data-topic-id="{{ topic.pk }}">
             <i class="fas fa-thumbs-up"></i>
             {% if user in topic.likes.all %}
@@ -43,15 +43,15 @@
             <p>{{ comment.body|safe }}</p>
             <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
             {% if comment.author == user %}
-            <div class="comment-buttons">            
-                <a href="{% url 'edit_comment' comment.pk %}" class="comment-button edit">Edit</a>
-                <form method="post" action="{% url 'delete_comment' comment.pk %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="comment-button delete">Delete</button>
-                </form>
-                {% endif %}
-                <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
-            </div>
+                <div class="comment-buttons">            
+                    <a href="{% url 'edit_comment' comment.pk %}" class="comment-button edit">Edit</a>
+                    <form method="post" action="{% url 'delete_comment' comment.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="comment-button delete">Delete</button>
+                    </form>
+                    <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
+                </div>
+            {% endif %}
             <ul class="reply-list list-unstyled ml-4">
                 {% for reply in comment.ordered_replies %}
                 <li class="reply mb-2">
