@@ -12,16 +12,10 @@ from django.views.decorators.http import require_POST
 def landing_page(request):
     return render(request, 'landing_page.html')
 
-def topic_page(request):
-    topics = Topic.objects.filter(published=True)
-    topics_with_likes = [
-        {
-            'topic': topic,
-            'like_count': topic.likes.count()
-        }
-        for topic in topics
-    ]
-    return render(request, 'topic_page.html', {'topics_with_likes': topics_with_likes})
+def topic_page(request, slug):
+    topic = get_object_or_404(Topic, slug=slug)
+    topics_with_likes = Topic.objects.filter(published=True)  # Adjust this query as needed
+    return render(request, 'topic_page.html', {'topic': topic, 'topics_with_likes': topics_with_likes})
 
 @login_required
 def topic_detail(request, pk):

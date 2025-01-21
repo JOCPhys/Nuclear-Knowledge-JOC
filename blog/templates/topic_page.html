@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Topic Page{% endblock %}
+{% block title %}{{ topic.title }}{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+
+<div class="masthead" style="background-image: url('{{ topic.image.url }}');">
+    <h1>{{ topic.title }}</h1>
+</div>
+<div class="container mt-5">
     <div class="row">
         <div class="col-12 mt-3 left">
             <div class="row">

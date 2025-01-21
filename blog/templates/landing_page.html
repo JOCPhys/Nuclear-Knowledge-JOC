@@ -1,7 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Landing Page{% endblock %}
 
 {% block content %}
-<h1>Welcome to the Landing Page</h1>
+<div class="masthead" style="background-image: url('{% static 'images/masthead.jpg' %}');">
+    <h1>Welcome to Nuclear Knowledge</h1>
+</div>
+<div class="container mt-5">
+    <div class="topic-cards">
+        <div class="topic-card">
+            <a href="{% url 'topic_page' 'nuclear_facilities' %}">
+                <img src="{% static 'images/nuclear_facilities.jpg' %}" alt="Nuclear Facilities in the UK">
+                <h3>Nuclear Facilities in the UK</h3>
+            </a>
+        </div>
+        <div class="topic-card">
+            <a href="{% url 'topic_page' 'nuclear_fuel_waste' %}">
+                <img src="{% static 'images/nuclear_fuel_waste.jpg' %}" alt="Manufacturing of Nuclear Fuel & Nuclear Waste Management">
+                <h3>Manufacturing of Nuclear Fuel & Nuclear Waste Management</h3>
+            </a>
+        </div>
+        <div class="topic-card">
+            <a href="{% url 'topic_page' 'nuclear_defence' %}">
+                <img src="{% static 'images/nuclear_defence.jpg' %}" alt="Nuclear Defence">
+                <h3>Nuclear Defence</h3>
+            </a>
+        </div>
+        <div class="topic-card">
+            <a href="{% url 'topic_page' 'nuclear_power_space' %}">
+                <img src="{% static 'images/nuclear_power_space.jpg' %}" alt="Nuclear Power in Space Tech">
+                <h3>Nuclear Power in Space Technology</h3>
+            </a>
+        </div>
+        <div class="topic-card">
+            <a href="{% url 'topic_page' 'fact_or_fiction' %}">
+                <img src="{% static 'images/fact_or_fiction.jpg' %}" alt="Fact or Fiction">
+                <h3>Fact or Fiction?</h3>
+            </a>
+        </div>
+        <div class="topic-card">
+            <a href="{% url 'topic_page' 'educational_resources' %}">
+                <img src="{% static 'images/educational_resources.jpg' %}" alt="Educational Resources about Nuclear Issues">
+                <h3>Educational Resources</h3>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}
