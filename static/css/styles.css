@@ -106,3 +106,172 @@ footer {
 form.mb-4 {
     margin-top: 20px; /* Adjust the value as needed */
 }
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.d-flex.justify-content-start .btn {
+    margin-right: 10px;
+}
+
+.comment-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.comment {
+    margin-bottom: 20px;
+}
+
+.reply-list {
+    list-style-type: none;
+    padding-left: 40px; /* Indent replies */
+}
+
+.reply {
+    margin-bottom: 40px;
+}
+
+/* General button styles for comments */
+.comment-button {
+    color: #005eff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+}
+
+.comment-button:hover {
+    color: grey; /* Change to secondary color on hover */
+    text-decoration: none;
+}
+
+/* Add styles for form buttons */
+.form-buttons {
+    margin-top: 10px;
+}
+
+/* Add styles for comment buttons */
+.comment-buttons {
+    margin-bottom: 40px;
+    display: block; /* Ensure the buttons are displayed as block elements */
+}
+
+/* Add padding underneath the like and read more buttons */
+.d-flex.justify-content-start.mb-3 {
+    margin-bottom: 10px;
+}
+
+/* Add space above the comment box */
+form.mb-4 {
+    margin-top: 20px; /* Adjust the value as needed */
+}
+
+/* Masthead styles */
+.masthead {
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.masthead h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+/* Responsive layout for topic pages */
+.topic-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.topic-card {
+    flex: 1 1 calc(33.333% - 20px);
+    margin: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.topic-card img {
+    width: 100%;
+    height: auto;
+}
+
+.topic-card h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.topic-card p {
+    padding: 0 10px 10px;
+}
+
+@media (max-width: 768px) {
+    .topic-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 576px) {
+    .topic-card {
+        flex: 1 1 100%;
+    }
+}
