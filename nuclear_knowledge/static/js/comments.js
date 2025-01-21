@@ -33,12 +33,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const editForm = this.nextElementSibling;
             if (editForm && editForm.tagName === 'FORM') {
                 const textarea = editForm.querySelector('textarea');
-                textarea.addEventListener('keydown', function(event) {
-                    if (event.key === 'Enter' && !event.shiftKey) {
-                        event.preventDefault();
-                        editForm.submit();
-                    }
-                });
+                if (textarea) {
+                    textarea.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter' && !event.shiftKey) {
+                            event.preventDefault();
+                            editForm.submit();
+                        }
+                    });
+                }
             }
         });
     });
@@ -47,12 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const addCommentForm = document.querySelector('form.mb-4');
     if (addCommentForm) {
         const textarea = addCommentForm.querySelector('textarea');
-        textarea.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                addCommentForm.submit();
-            }
-        });
+        if (textarea) {
+            textarea.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    addCommentForm.submit();
+                }
+            });
+        }
     }
 });
 
