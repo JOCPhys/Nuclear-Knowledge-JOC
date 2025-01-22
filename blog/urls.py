@@ -4,7 +4,12 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.landing_page, name='landing_page'),
-    path('topic/<slug:slug>/', views.topic_page, name='topic_page'),
+    path('topic/nuclear-facilities/', views.nuclear_facilities, name='nuclear_facilities'),
+    path('topic/nuclear-fuel-waste/', views.nuclear_fuel_waste, name='nuclear_fuel_waste'),
+    path('topic/nuclear-defence/', views.nuclear_defence, name='nuclear_defence'),
+    path('topic/nuclear-power-space/', views.nuclear_power_space, name='nuclear_power_space'),
+    path('topic/fact-or-fiction/', views.fact_or_fiction, name='fact_or_fiction'),
+    path('topic/educational-resources/', views.educational_resources, name='educational_resources'),
     path('topic/<slug:slug>/detail/', views.topic_detail, name='topic_detail'),
     path('create_topic/', views.create_topic, name='create_topic'),
     path('topic/<int:pk>/create_comment/', views.create_comment, name='create_comment'),

@@ -13,10 +13,35 @@ def landing_page(request):
     topics = Topic.objects.filter(published=True)
     return render(request, 'landing_page.html', {'topics': topics})
 
-def topic_page(request, slug):
-    topic = get_object_or_404(Topic, slug=slug)
-    topics_with_likes = Topic.objects.filter(published=True)  # Adjust this query as needed
-    return render(request, 'topic_page.html', {'topic': topic, 'topics_with_likes': topics_with_likes})
+def nuclear_facilities(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-facilities')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_facilities.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
+
+def nuclear_fuel_waste(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-fuel-waste')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_fuel_waste.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
+
+def nuclear_defence(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-defence')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_defence.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
+
+def nuclear_power_space(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-power-space')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_power_space.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
+
+def fact_or_fiction(request):
+    topics = Topic.objects.filter(slug__startswith='fact-or-fiction')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'fact_or_fiction.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
+
+def educational_resources(request):
+    topics = Topic.objects.filter(slug__startswith='educational-resources')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'educational_resources.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def topic_detail(request, slug):
     topic = get_object_or_404(Topic, slug=slug)
