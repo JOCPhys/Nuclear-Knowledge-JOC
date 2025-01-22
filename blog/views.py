@@ -10,16 +10,16 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
 def landing_page(request):
-    return render(request, 'landing_page.html')
+    topics = Topic.objects.filter(published=True)
+    return render(request, 'landing_page.html', {'topics': topics})
 
 def topic_page(request, slug):
     topic = get_object_or_404(Topic, slug=slug)
     topics_with_likes = Topic.objects.filter(published=True)  # Adjust this query as needed
     return render(request, 'topic_page.html', {'topic': topic, 'topics_with_likes': topics_with_likes})
 
-@login_required
-def topic_detail(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
+def topic_detail(request, slug):
+    topic = get_object_or_404(Topic, slug=slug)
     comments = Comment.objects.filter(topic=topic, parent__isnull=True)  # Fetch only top-level comments
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -28,7 +28,7 @@ def topic_detail(request, pk):
             comment.author = request.user
             comment.topic = topic
             comment.save()
-            return redirect('topic_detail', pk=pk)
+            return redirect('topic_detail', slug=slug)
     else:
         form = CommentForm()
     # Order replies for each comment
@@ -42,6 +42,19 @@ def topic_detail(request, pk):
     })
 
 @login_required
+@require_POST
+def like_topic(request, pk):
+    topic = get_object_or_404(Topic, pk=pk)
+    if request.user in topic.likes.all():
+        topic.likes.remove(request.user)
+        liked = False
+    else:
+        topic.likes.add(request.user)
+        liked = True
+    like_count = topic.likes.count()
+    return JsonResponse({'liked': liked, 'like_count': like_count})
+
+@login_required
 def create_topic(request):
     if request.method == 'POST':
         form = TopicForm(request.POST, request.FILES)
@@ -49,7 +62,7 @@ def create_topic(request):
             topic = form.save(commit=False)
             topic.author = request.user
             topic.save()
-            return redirect('topic_page')
+            return redirect('topic_detail', slug=topic.slug)
     else:
         form = TopicForm()
     return render(request, 'create_topic.html', {'form': form})
@@ -64,7 +77,7 @@ def create_comment(request, pk):
             comment.author = request.user
             comment.topic = topic
             comment.save()
-            return redirect('topic_detail', pk=pk)
+            return redirect('topic_detail', slug=topic.slug)
     else:
         form = CommentForm()
     return render(request, 'create_comment.html', {'form': form})
@@ -74,45 +87,24 @@ def delete_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'POST' and comment.author == request.user:
         comment.delete()
-        return redirect('topic_detail', pk=comment.topic.pk)
+        return redirect('topic_detail', slug=comment.topic.slug)
     return render(request, 'topic_detail.html', {'topic': comment.topic})
 
 @login_required
 def edit_comment(request, pk):
-    ### remember to remove this print command line after debugging ###
-    print(f"Edit comment view called with pk: {pk}")  # Add this line
     comment = get_object_or_404(Comment, pk=pk)
-    ### remember to remove line after checking console log for URL ###
-    print(f"Edit comment URL: {reverse('edit_comment', args=[pk])}")
-    ### remember to remove line after checking console log for URL ###
-    print(f"Comment found: {comment}")
-    
     if request.user != comment.author:
-        return redirect('topic_detail', pk=comment.topic.pk)
+        return redirect('topic_detail', slug=comment.topic.slug)
 
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
-            return redirect('topic_detail', pk=comment.topic.pk)
+            return redirect('topic_detail', slug=comment.topic.slug)
     else:
         form = CommentForm(instance=comment)
 
-    return render(request, 'blog/edit_comment.html', {'form': form, 'comment': comment})
-
-""" views the like/unlike requests """
-@login_required 
-@require_POST
-def like_topic(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
-    if request.user in topic.likes.all():
-        topic.likes.remove(request.user)
-        liked = False
-    else:
-        topic.likes.add(request.user)
-        liked = True
-    like_count = topic.likes.count()
-    return JsonResponse({'liked': liked, 'like_count': like_count})
+    return render(request, 'edit_comment.html', {'form': form, 'comment': comment})
 
 def register(request):
     if request.method == 'POST':
