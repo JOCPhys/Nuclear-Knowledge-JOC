@@ -19,7 +19,7 @@ def nuclear_facilities(request):
     return render(request, 'nuclear_facilities.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def nuclear_fuel_waste(request):
-    topics = Topic.objects.filter(slug__startswith='nuclear-fuel-waste')
+    topics = Topic.objects.filter(category='nuclear_fuel_waste')
     topics_with_likes = topics.filter(published=True)
     return render(request, 'nuclear_fuel_waste.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
@@ -29,18 +29,18 @@ def nuclear_defence(request):
     return render(request, 'nuclear_defence.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def nuclear_power_space(request):
-    topics = Topic.objects.filter(slug__startswith='nuclear-power-space')
-    topics_with_likes = Topic.objects.filter(published=True)
+    topics = Topic.objects.filter(category='nuclear-power-space')
+    topics_with_likes = topics.filter(published=True)
     return render(request, 'nuclear_power_space.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def fact_or_fiction(request):
-    topics = Topic.objects.filter(slug__startswith='fact-or-fiction')
-    topics_with_likes = Topic.objects.filter(published=True)
+    topics = Topic.objects.filter(category='fact-or-fiction')
+    topics_with_likes = topics.filter(published=True)
     return render(request, 'fact_or_fiction.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def educational_resources(request):
-    topics = Topic.objects.filter(slug__startswith='educational-resources')
-    topics_with_likes = Topic.objects.filter(published=True)
+    topics = Topic.objects.filter(category='educational-resources')
+    topics_with_likes = topics.filter(published=True)
     return render(request, 'educational_resources.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def topic_detail(request, slug):

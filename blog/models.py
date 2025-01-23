@@ -8,11 +8,15 @@ from cloudinary.models import CloudinaryField
 class Topic(models.Model):
     CATEGORY_OPTION = [
         ('nuclear_facilities', 'Nuclear Facilities'),
+        ('nuclear_fuel_waste', 'Nuclear Fuel & Waste'),
         ('nuclear_defence', 'Nuclear Defence'),
+        ('nuclear_power_space', 'Nuclear Power in Space'),
+        ('fact_or_fiction', 'Fact or Fiction'),
+        ('educational_resources', 'Educational Resources'),
     ]
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    slug = models.SlugField(max_length=300, unique=True, blank=True)
     content = models.TextField()
     excerpt = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
