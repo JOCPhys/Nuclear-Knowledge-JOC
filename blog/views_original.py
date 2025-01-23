@@ -10,78 +10,62 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView
 
-class LandingPageView(ListView):
-    model = Topic
-    template_name = 'landing_page.html'
-    context_object_name = 'topics'
-    queryset = Topic.objects.filter(published=True)
+def landing_page(request):
+    topics = Topic.objects.filter(published=True)
+    return render(request, 'landing_page.html', {'topics': topics})
 
+def nuclear_facilities(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-facilities')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_facilities.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
-class NuclearFacilitiesView(ListView):
-    model = Topic
-    template_name = 'nuclear_facilities.html'
-    context_object_name = 'topics'
+def nuclear_fuel_waste(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-fuel-waste')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_fuel_waste.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
-    def get_queryset(self):
-        return Topic.objects.filter(slug__startswith='nuclear-facilities')
+def nuclear_defence(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-defence')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_defence.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
+def nuclear_power_space(request):
+    topics = Topic.objects.filter(slug__startswith='nuclear-power-space')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'nuclear_power_space.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
-class NuclearFuelWasteView(ListView):
-    model = Topic
-    template_name = 'nuclear_fuel_waste.html'
-    context_object_name = 'topics'
+def fact_or_fiction(request):
+    topics = Topic.objects.filter(slug__startswith='fact-or-fiction')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'fact_or_fiction.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
-    def get_queryset(self):
-        return Topic.objects.filter(slug__startswith='nuclear-fuel-waste')
+def educational_resources(request):
+    topics = Topic.objects.filter(slug__startswith='educational-resources')
+    topics_with_likes = Topic.objects.filter(published=True)
+    return render(request, 'educational_resources.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
-
-class NuclearDefenceView(ListView):
-    model = Topic
-    template_name = 'nuclear_defence.html'
-    context_object_name = 'topics'
-
-    def get_queryset(self):
-        return Topic.objects.filter(slug__startswith='nuclear-defence')
-
-
-class NuclearPowerSpaceView(ListView):
-    model = Topic
-    template_name = 'nuclear_power_space.html'
-    context_object_name = 'topics'
-
-    def get_queryset(self):
-        return Topic.objects.filter(slug__startswith='nuclear-power-space')
-
-
-class FactOrFictionView(ListView):
-    model = Topic
-    template_name = 'fact_or_fiction.html'
-    context_object_name = 'topics'
-
-    def get_queryset(self):
-        return Topic.objects.filter(slug__startswith='fact-or-fiction')
-
-
-class EducationalResourcesView(ListView):
-    model = Topic
-    template_name = 'educational_resources.html'
-    context_object_name = 'topics'
-
-    def get_queryset(self):
-        return Topic.objects.filter(slug__startswith='educational-resources')
-
-
-class TopicDetailView(DetailView):
-    model = Topic
-    template_name = 'topic_detail.html'
-    context_object_name = 'topic'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(topic=self.object, parent__isnull=True)
-        context['form'] = CommentForm()
-        context['like_count'] = self.object.likes.count()
-        return context
+def topic_detail(request, slug):
+    topic = get_object_or_404(Topic, slug=slug)
+    comments = Comment.objects.filter(topic=topic, parent__isnull=True)  # Fetch only top-level comments
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.topic = topic
+            comment.save()
+            return redirect('topic_detail', slug=slug)
+    else:
+        form = CommentForm()
+    # Order replies for each comment
+    for comment in comments:
+        comment.ordered_replies = comment.replies.all().order_by('created_at')
+    return render(request, 'topic_detail.html', {
+        'topic': topic,
+        'comments': comments,
+        'form': form,
+        'like_count': topic.likes.count()  # Pass the like count to the template
+    })
 
 @login_required
 @require_POST

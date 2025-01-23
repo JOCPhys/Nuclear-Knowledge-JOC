@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}top list{% endblock %}
+
+{% block content %}
+
+{% for topic in topics %}
+<div></div>
+<h1>{{ topic.title }}</h1>
+<p class="btn btn-danger">{{ topic.category.name }}</p>
+</div>
+{% endfor %}
+{% endblock %}

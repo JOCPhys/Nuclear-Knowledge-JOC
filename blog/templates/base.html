@@ -22,10 +22,10 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'landing_page' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'nuclear_facilities' %}">Nuclear Facilities</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'nuclear_fuel_waste' %}">Nuclear Fuel & Waste</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'toplist' %}?category=waste">Nuclear Fuel & Waste</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'nuclear_defence' %}">Nuclear Defence</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'nuclear_power_space' %}">Nuclear Power in Space</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'fact_or_fiction' %}">Fact or Fiction</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'toplist' %}?category=fact">Fact or Fiction</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'educational_resources' %}">Educational Resources</a></li>
                         {% if user.is_authenticated %}
                             <li class="nav-item">

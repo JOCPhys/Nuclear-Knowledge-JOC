@@ -4,19 +4,25 @@ from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 
 # Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 class Topic(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
     content = models.TextField()
     excerpt = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
     image = CloudinaryField('image', blank=True, null=True, default='placeholder.png')
     alt_description = models.CharField(max_length=255, blank=True, null=True)
+    likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
