@@ -14,18 +14,18 @@ def landing_page(request):
     return render(request, 'landing_page.html', {'topics': topics})
 
 def nuclear_facilities(request):
-    topics = Topic.objects.filter(slug__startswith='nuclear-facilities')
-    topics_with_likes = Topic.objects.filter(published=True)
+    topics = Topic.objects.filter(category='nuclear_facilities')
+    topics_with_likes = topics.filter(published=True)
     return render(request, 'nuclear_facilities.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def nuclear_fuel_waste(request):
     topics = Topic.objects.filter(slug__startswith='nuclear-fuel-waste')
-    topics_with_likes = Topic.objects.filter(published=True)
+    topics_with_likes = topics.filter(published=True)
     return render(request, 'nuclear_fuel_waste.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def nuclear_defence(request):
-    topics = Topic.objects.filter(slug__startswith='nuclear-defence')
-    topics_with_likes = Topic.objects.filter(published=True)
+    topics = Topic.objects.filter(category='nuclear_defence')
+    topics_with_likes = topics.filter(published=True)
     return render(request, 'nuclear_defence.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def nuclear_power_space(request):
@@ -129,7 +129,7 @@ def edit_comment(request, pk):
     else:
         form = CommentForm(instance=comment)
 
-    return render(request, 'edit_comment.html', {'form': form, 'comment': comment})
+    return render(request, 'blog/edit_comment.html', {'form': form, 'comment': comment})
 
 def register(request):
     if request.method == 'POST':

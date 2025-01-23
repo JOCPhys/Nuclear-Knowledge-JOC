@@ -6,6 +6,11 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Topic(models.Model):
+    CATEGORY_OPTION = [
+        ('nuclear_facilities', 'Nuclear Facilities'),
+        ('nuclear_defence', 'Nuclear Defence'),
+    ]
+
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     content = models.TextField()
@@ -17,6 +22,7 @@ class Topic(models.Model):
     likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
     image = CloudinaryField('image', blank=True, null=True, default='placeholder.png')
     alt_description = models.CharField(max_length=255, blank=True, null=True)
+    category = models.CharField(max_length=200, choices=CATEGORY_OPTION, default='nuclear_facilities')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -25,6 +31,7 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='comments')
