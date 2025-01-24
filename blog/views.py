@@ -29,17 +29,17 @@ def nuclear_defence(request):
     return render(request, 'nuclear_defence.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def nuclear_power_space(request):
-    topics = Topic.objects.filter(category='nuclear-power-space')
+    topics = Topic.objects.filter(category='nuclear_power_space')
     topics_with_likes = topics.filter(published=True)
     return render(request, 'nuclear_power_space.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def fact_or_fiction(request):
-    topics = Topic.objects.filter(category='fact-or-fiction')
+    topics = Topic.objects.filter(category='fact_or_fiction')
     topics_with_likes = topics.filter(published=True)
     return render(request, 'fact_or_fiction.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
 def educational_resources(request):
-    topics = Topic.objects.filter(category='educational-resources')
+    topics = Topic.objects.filter(category='educational_resources')
     topics_with_likes = topics.filter(published=True)
     return render(request, 'educational_resources.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
