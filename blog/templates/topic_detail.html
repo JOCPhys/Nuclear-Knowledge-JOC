@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load category_urls %}
 
 {% block title %}{{ topic.title }}{% endblock %}
 
@@ -16,25 +17,14 @@
     <p><small class="text-muted">{{ topic.comments.count }} comments</small></p>
     <p class="card-text" id="like-count-{{ topic.pk }}"><small class="text-muted">{{ like_count }} likes</small></p>
     <div class="d-flex justify-content-start mb-3">
-        <button class="btn btn-outline-primary like-button mb-6" data-topic-id="{{ topic.pk }}">
-            <i class="fas fa-thumbs-up"></i>
-            {% if user in topic.likes.all %}
-                Unlike
-            {% else %}
-                Like
-            {% endif %}
-        </button>
-        <a href="{% url 'topic_detail' topic.pk %}" class="btn btn-primary mb-6">Read More</a>
+        <a href="#add-comment" class="btn btn-primary mb-6">Add a Comment</a>
     </div>
-    <br>
-    <h5>Add a Comment</h5>
+    <h5 id="add-comment">Add a Comment</h5>
     <form method="post" class="mb-4">
         {% csrf_token %}
-        {{ form.body }}
-        <div class="form-buttons">
-            <button type="submit" class="btn btn-primary">Add Comment</button>
-            <a href="{% url 'landing_page' %}" class="btn btn-secondary">Return to Topics</a>
-        </div>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+        <a href="{% category_url topic.category %}" class="btn btn-secondary">Return to {{ topic.get_category_display }}</a>
     </form>
     <h3>Comments</h3>
     <ul class="comment-list list-unstyled">

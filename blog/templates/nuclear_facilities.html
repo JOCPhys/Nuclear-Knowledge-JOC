@@ -9,7 +9,8 @@
     <div class="row">
         {% for topic in topics_with_likes %}
         <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
-            <div class="card h-100">
+            <div class="card topic-card h-100">
+                <a href="{% url 'topic_detail' topic.slug %}" class="stretched-link"></a>
                 {% if topic.image %}
                     <img src="{{ topic.image.url }}" class="card-img-top" alt="{{ topic.alt_description }}">
                 {% else %}
@@ -21,15 +22,7 @@
                     <p class="card-text"><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
                     <p class="card-text"><small class="text-muted">{{ topic.comments.count }} comments</small></p>
                     <p class="card-text" id="like-count-{{ topic.pk }}"><small class="text-muted">{{ topic.likes.count }} likes</small></p>
-                    <button class="btn btn-outline-primary like-button" data-topic-id="{{ topic.pk }}">
-                        <i class="fas fa-thumbs-up"></i>
-                        {% if user in topic.likes.all %}
-                            Unlike
-                        {% else %}
-                            Like
-                        {% endif %}
-                    </button>
-                    <a href="{% url 'topic_detail' topic.slug %}" class="btn btn-primary">Read More</a>
+                    <a href="{% url 'topic_detail' topic.slug %}#add-comment" class="btn btn-primary">Add a Comment</a>
                 </div>
             </div>
         </div>
