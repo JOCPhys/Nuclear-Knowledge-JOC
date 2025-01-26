@@ -48,13 +48,59 @@ footer {
     bottom: 0;
 }
 
+/* Custom styles for .card-text */
+.card-text {
+    font-size: 1rem; /* Adjust the font size */
+    color: #333; /* Change the text color */
+    margin-bottom: 10px; /* Add margin below the text */
+}
+
 .d-flex.justify-content-start .btn {
     margin-right: 10px;
+}
+
+.d-flex.justify-content-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 15px; /* Added padding below */
+}
+
+.d-flex.justify-content-start p {
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    line-height: 1.5; /* Consistent line height */
+}
+
+.d-flex.justify-content-start p:first-child {
+    margin-right: 15px; /* Increase space between comments and likes */
+}
+
+.d-flex.justify-content-start p small {
+    color: #005eff;
+    vertical-align: middle; /* Further ensures text alignment */
+}
+
+.d-flex.justify-content-start p small:hover {
+    color: #0037ff; /* Slightly darker blue on hover */
+    text-decoration: none; /* Prevents underline */
+}
+
+.comment-count,
+.like-count {
+    font-size: 0.9rem;
+    color: #005eff;
+    margin: 0;
+    line-height: 1;
 }
 
 .comment-list {
     list-style-type: none;
     padding-left: 0;
+}
+
+.mr-3 {
+    margin-right: 1rem !important;
 }
 
 .comment {
@@ -83,8 +129,9 @@ footer {
 }
 
 .comment-button:hover {
-    color: grey; /* Change to secondary color on hover */
+    color: #0037ff; /* Change to darker blue on hover */
     text-decoration: none;
+    font-style: italic;
 }
 
 /* Add styles for form buttons */
@@ -96,6 +143,52 @@ footer {
 .comment-buttons {
     margin-bottom: 40px;
     display: block; /* Ensure the buttons are displayed as block elements */
+}
+.add-comment-btn {
+    background-color: #28a745; /* Green background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.add-comment-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    color: white;
+}
+
+.return-category-btn {
+    background-color: #17a2b8; /* Blue background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.return-category-btn:hover {
+    background-color: #138496; /* Darker blue on hover */
+    color: white;
+}
+
+.return-home-btn {
+    background-color: #ffc107; /* Yellow background */
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.return-home-btn:hover {
+    background-color: #e0a800; /* Darker yellow on hover */
+    color: black;
 }
 
 /* Add space above the comment box */
@@ -118,6 +211,16 @@ form.mb-4 {
 .masthead h1 {
     font-size: 2.5rem;
     margin: 0;
+}
+
+.card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-link:hover {
+    text-decoration: none;
 }
 
 /* Responsive layout for topic pages */
@@ -163,34 +266,6 @@ form.mb-4 {
     padding: 0 10px 10px;
 }
 
-.d-flex.justify-content-start {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-bottom: 15px; /* Added padding below */
-}
-
-.d-flex.justify-content-start p {
-    /* margin-right: 10px; */ /* Add some space between the elements */
-    margin: 0; /* Remove default margins */
-    padding: 0; /* Remove default padding */
-    line-height: 1.5; /* Consistent line height */
-}
-
-.d-flex.justify-content-start p:first-child {
-    margin-right: 15px; /* Increase space between comments and likes */
-}
-
-.d-flex.justify-content-start p small {
-    color: #005eff;
-    vertical-align: middle; /* Further ensures text alignment */
-}
-
-.d-flex.justify-content-start p small:hover {
-    color: #0037ff; /* Slightly darker blue on hover */
-    text-decoration: none; /* Prevents underline */
-}
-
 /* Add padding underneath the like and read more buttons */
 .d-flex.justify-content-start.mb-3 {
     margin-bottom: 15px; /* Increased from 10px for more space */
@@ -205,7 +280,8 @@ form.mb-4 {
     margin: 0;
     padding: 0;
     line-height: 1.5;
-    
+    margin-right: 10px; /* Add margin between comments and likes */
+}    
 
 /* Add padding underneath the like and read more buttons */
 .d-flex.justify-content-start.mb-3 {
@@ -213,9 +289,12 @@ form.mb-4 {
 }
 
 .author-info {
-    font-size: 1.50rem; /* Adjust the size as needed */
+    font-size: 1.50rem; 
     font-weight: bold;
+    margin-bottom: 10px;
 }
+
+
 
 @media (max-width: 992px) {
     .topic-card {

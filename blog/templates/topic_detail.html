@@ -13,7 +13,7 @@
         <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="img-fluid w-50">
     {% endif %}
     <p>{{ topic.content|safe }}</p>
-    <p><class="author-info">By {{ topic.author }} on {{ topic.created_at }}</small></p>
+    <p class="author-info"><strong>Created by {{ topic.author }} on {{ topic.created_at }}</strong></p>
     <div class="d-flex justify-content-start">
         <p class="mr-3 mb-0"><small>{{ topic.comments.count }} comments</small></p>
         <p class="card-text mb-0" id="like-count-{{ topic.pk }}"><small>{{ like_count }} likes</small></p>
@@ -23,9 +23,9 @@
         {% csrf_token %}
         {{ form.body }}
         <div>
-            <button type="submit" class="btn btn-primary">Add Comment</button>
-            <a href="{% category_url topic.category %}" class="btn btn-secondary">Return to {{ topic.get_category_display }}</a>
-            <a href="{% url 'landing_page' %}" class="btn btn-secondary">Return Home</a>
+            <button type="submit" class="btn btn-primary add-comment-btn">Add Comment</button>
+            <a href="{% category_url topic.category %}" class="btn btn-secondary return-category-btn">Return to {{ topic.get_category_display }}</a>
+            <a href="{% url 'landing_page' %}" class="btn btn-secondary return-home-btn">Return Home</a>
         </div>
     </form>
     <h3>Comments</h3>
@@ -33,7 +33,7 @@
         {% for comment in comments %}
         <li class="comment mb-3">
             <p>{{ comment.body|safe }}</p>
-            <p>By {{ comment.author.username }} on {{ comment.created_at }}</p>
+            <p> - Written by <strong>{{ comment.author.username }}</strong> on <strong>{{ comment.created_at }}</strong></p>
             {% if comment.author == user %}
                 <div class="comment-buttons">            
                     <a href="{% url 'edit_comment' comment.pk %}" class="comment-button edit">Edit</a>
@@ -48,7 +48,7 @@
                 {% for reply in comment.ordered_replies %}
                 <li class="reply mb-2">
                     <p>{{ reply.body|safe }}</p>
-                    <p>By {{ reply.author.username }} on {{ reply.created_at }}</p>
+                    <p><em> - Reply from {{ reply.author.username }} on {{ reply.created_at }}</em></p>
                     {% if reply.author == user %}
                         <div class="comment-buttons">
                             <a href="{% url 'edit_comment' reply.pk %}" class="comment-button edit">Edit</a>

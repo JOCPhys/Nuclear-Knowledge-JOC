@@ -45,6 +45,8 @@ def educational_resources(request):
 def topic_detail(request, slug):
     topic = get_object_or_404(Topic, slug=slug)
     comments = Comment.objects.filter(topic=topic, parent__isnull=True)  # Fetch only top-level comments
+    topics_with_likes = Topic.objects.filter(published=True).exclude(pk=topic.pk)  # Example for related topics
+    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
