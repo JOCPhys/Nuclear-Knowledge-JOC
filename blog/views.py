@@ -1,5 +1,5 @@
-from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib.auth import login
 from allauth.account.forms import SignupForm
 from django.contrib.auth.views import LoginView, LogoutView
@@ -43,11 +43,14 @@ def educational_resources(request):
     topics_with_likes = topics.filter(published=True)
     return render(request, 'educational_resources.html', {'topics': topics, 'topics_with_likes': topics_with_likes})
 
+@login_required
 def topic_detail(request, slug):
     topic = get_object_or_404(Topic, slug=slug)
     comments = Comment.objects.filter(topic=topic, parent__isnull=True)  # Fetch only top-level comments
     topics_with_likes = Topic.objects.filter(published=True).exclude(pk=topic.pk)  # Example for related topics
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect(f"{reverse('login')}?next={request.path}")  # Redirect to login if user is not authenticated
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
@@ -65,6 +68,7 @@ def topic_detail(request, slug):
         'comments': comments,
         'form': form,
         'like_count': topic.likes.count(),  # Pass the like count to the template
+        'topics_with_likes': topics_with_likes,  # Pass related topics to the template
     })
 
 @login_required
