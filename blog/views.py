@@ -5,6 +5,7 @@ from allauth.account.forms import SignupForm
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Topic, Comment
 from .forms import TopicForm, CommentForm, CommentEditForm
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
@@ -46,7 +47,6 @@ def topic_detail(request, slug):
     topic = get_object_or_404(Topic, slug=slug)
     comments = Comment.objects.filter(topic=topic, parent__isnull=True)  # Fetch only top-level comments
     topics_with_likes = Topic.objects.filter(published=True).exclude(pk=topic.pk)  # Example for related topics
-    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -64,7 +64,7 @@ def topic_detail(request, slug):
         'topic': topic,
         'comments': comments,
         'form': form,
-        'like_count': topic.likes.count()  # Pass the like count to the template
+        'like_count': topic.likes.count(),  # Pass the like count to the template
     })
 
 @login_required
