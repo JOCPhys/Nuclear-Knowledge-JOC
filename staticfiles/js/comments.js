@@ -26,33 +26,73 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add event listener for Enter/Return key when editing a comment or reply
-    const editButtons = document.querySelectorAll('.comment-button.edit');
-    editButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-            const editForm = this.nextElementSibling;
-            if (editForm && editForm.tagName === 'FORM') {
-                const textarea = editForm.querySelector('textarea');
-                textarea.addEventListener('keydown', function(event) {
-                    if (event.key === 'Enter' && !event.shiftKey) {
-                        event.preventDefault();
-                        editForm.submit();
-                    }
-                });
-            }
-        });
-    });
+    // const editButtons = document.querySelectorAll('.comment-button.edit');
+    // editButtons.forEach(button => {
+    //    button.addEventListener('click', function(event) {
+    //        event.preventDefault();
+    //      const editUrl = this.getAttribute('href');
+    //        fetch(editUrl)
+    //            .then(response => response.text())
+    //            .then(html => {
+    //                const parser = new DOMParser();
+    //                const doc = parser.parseFromString(html, 'text/html');
+    //                const form = doc.querySelector('form');
+    //                if (form) {
+                        // Clear any existing form
+    //                    const existingForm = this.parentElement.querySelector('form');
+    //                    if (existingForm) {
+    //                        existingForm.remove();
+    //                    }
+    //                    this.parentElement.appendChild(form);
+
+    //                    const textarea = form.querySelector('textarea');
+    //                    if (textarea) {
+    //                        textarea.focus();
+    //                        textarea.addEventListener('keydown', function(event) {
+    //                            if (event.key === 'Enter' && !event.shiftKey) {
+    //                                event.preventDefault();
+    //                                form.submit();
+    //                            }
+    //                        });
+    //                    }
+    //                } else {
+    //                    console.error('Form not found in the fetched HTML.');
+    //                }
+    //            })
+    //            .catch(error => {
+    //                console.error('Error fetching the edit form:', error);
+    //            });
+    //    });
+    //});
+
+    //         if (editForm && editForm.tagName === 'FORM') {
+
+    //             const textarea = editForm.querySelector('textarea');
+    //             if (textarea) {
+    //                 textarea.focus();
+    //                 textarea.addEventListener('keydown', function(event) {
+    //                     if (event.key === 'Enter' && !event.shiftKey) {
+    //                         event.preventDefault();
+    //                         editForm.submit();
+    //                     }
+    //                 });
+    //             }
+    //         }
+    //     });
+    // });
 
     // Add event listener for Enter/Return key when adding a comment
     const addCommentForm = document.querySelector('form.mb-4');
     if (addCommentForm) {
         const textarea = addCommentForm.querySelector('textarea');
-        textarea.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                addCommentForm.submit();
-            }
-        });
+        if (textarea) {
+            textarea.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    addCommentForm.submit();
+                }
+            });
+        }
     }
 });
 

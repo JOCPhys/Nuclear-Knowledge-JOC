@@ -1,3 +1,4 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -97,12 +98,133 @@ footer {
     display: block; /* Ensure the buttons are displayed as block elements */
 }
 
+/* Add space above the comment box */
+form.mb-4 {
+    margin-top: 20px; /* Adjust the value as needed */
+}
+
+/* Masthead styles */
+.masthead {
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.masthead h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+/* Responsive layout for topic pages */
+.topic-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.topic-card {
+    flex: 1 1 calc(33.333% - 20px);
+    margin: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+
+.stretched-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.topic-card img {
+    width: 100%;
+    height: auto;
+}
+
+.topic-card h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.topic-card p {
+    padding: 0 10px 10px;
+}
+
+.d-flex.justify-content-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 15px; /* Added padding below */
+}
+
+.d-flex.justify-content-start p {
+    /* margin-right: 10px; */ /* Add some space between the elements */
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    line-height: 1.5; /* Consistent line height */
+}
+
+.d-flex.justify-content-start p:first-child {
+    margin-right: 15px; /* Increase space between comments and likes */
+}
+
+.d-flex.justify-content-start p small {
+    color: #005eff;
+    vertical-align: middle; /* Further ensures text alignment */
+}
+
+.d-flex.justify-content-start p small:hover {
+    color: #0037ff; /* Slightly darker blue on hover */
+    text-decoration: none; /* Prevents underline */
+}
+
+/* Add padding underneath the like and read more buttons */
+.d-flex.justify-content-start.mb-3 {
+    margin-bottom: 15px; /* Increased from 10px for more space */
+}
+
+.comments-likes-container {
+    display: flex;
+    align-items: center;
+}
+
+.comments-likes-container p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    
+
 /* Add padding underneath the like and read more buttons */
 .d-flex.justify-content-start.mb-3 {
     margin-bottom: 10px;
 }
 
-/* Add space above the comment box */
-form.mb-4 {
-    margin-top: 20px; /* Adjust the value as needed */
+.author-info {
+    font-size: 1.25rem; /* Adjust the size as needed */
+    font-weight: bold;
+}
+
+@media (max-width: 992px) {
+    .topic-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 576px) {
+    .topic-card {
+        flex: 1 1 100%;
+    }
 }

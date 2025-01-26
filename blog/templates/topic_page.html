@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ item.topic.title }}</h5>
                             <p class="card-text">{{ item.topic.excerpt }}</p>
-                            <p class="card-text"><small class="text-muted">By {{ item.topic.author }} on {{ item.topic.created_at }}</small></p>
+                            <p class="card-text"><small class="text-muted">Written by {{ item.topic.author }} on {{ item.topic.created_at }}</small></p>
                             <p class="card-text"><small class="text-muted">{{ item.topic.comments.count }} comments</small></p>
                             <p class="card-text" id="like-count-{{ item.topic.pk }}"><small class="text-muted">{{ item.like_count }} likes</small></p>
                                 <button class="btn btn-outline-primary like-button" data-topic-id="{{ item.topic.pk }}">
