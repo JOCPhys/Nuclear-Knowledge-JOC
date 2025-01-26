@@ -4,9 +4,8 @@ from django.contrib.auth import login
 from allauth.account.forms import SignupForm
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Topic, Comment
-from .forms import TopicForm, CommentForm
+from .forms import TopicForm, CommentForm, CommentEditForm
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
 def landing_page(request):
@@ -122,12 +121,12 @@ def edit_comment(request, pk):
         return redirect('topic_detail', slug=comment.topic.slug)
 
     if request.method == 'POST':
-        form = CommentForm(request.POST, instance=comment)
+        form = CommentEditForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
             return redirect('topic_detail', slug=comment.topic.slug)
     else:
-        form = CommentForm(instance=comment)
+        form = CommentEditForm(instance=comment)
 
     return render(request, 'blog/edit_comment.html', {'form': form, 'comment': comment})
 

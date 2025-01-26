@@ -13,3 +13,8 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'parent': forms.HiddenInput()
         }
+        
+class CommentEditForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']

@@ -13,7 +13,7 @@
         <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="img-fluid w-50">
     {% endif %}
     <p>{{ topic.content|safe }}</p>
-    <p><small class="text-muted">By {{ topic.author }} on {{ topic.created_at }}</small></p>
+    <p><class="author-info">By {{ topic.author }} on {{ topic.created_at }}</small></p>
     <div class="d-flex justify-content-start">
         <p class="mr-3 mb-0"><small>{{ topic.comments.count }} comments</small></p>
         <p class="card-text mb-0" id="like-count-{{ topic.pk }}"><small>{{ like_count }} likes</small></p>
