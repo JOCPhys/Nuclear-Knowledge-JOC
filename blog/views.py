@@ -94,7 +94,7 @@ def create_topic(request):
             topic.author = request.user
             topic.approved = False  # Set initial approval status to False
             topic.save()
-            return redirect('topic_detail', slug=topic.slug)
+            return redirect('landing_page')  # Redirect to the landing page
     else:
         form = TopicForm()
     return render(request, 'create_topic.html', {'form': form})
