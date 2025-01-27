@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}Nuclear Knowledge JOC{% endblock %}</title>
+    <title>{% block title %}Nuclear Knowledge{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,8 +13,9 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'landing_page' %}">
-                    <img src="{% static 'images/placeholder.png' %}" alt="Logo" style="width: 30px; height: 30px; margin-right: 10px;"><strong></strong>
-                    Nuclear Knowledge</strong></a>
+                    <img src="{% static 'images/placeholder.png' %}" alt="Logo" style="width: 30px; height: 30px; margin-right: 10px;">
+                    <strong>Nuclear Knowledge</strong>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,6 +29,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'fact_or_fiction' %}">Fact or Fiction</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'educational_resources' %}">Educational Resources</a></li>
                         {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'create_topic' %}">Create Topic</a></li>
                             <li class="nav-item">
                                 <form method="post" action="{% url 'logout' %}" class="form-inline">
                                     {% csrf_token %}
@@ -35,6 +37,7 @@
                                 </form>
                             </li>
                         {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
                         {% endif %}

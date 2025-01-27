@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
 from django.contrib.auth import login
 from allauth.account.forms import SignupForm
@@ -6,11 +8,10 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .models import Topic, Comment
 from .forms import TopicForm, CommentForm, CommentEditForm
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 def landing_page(request):
-    topics = Topic.objects.filter(published=True)
+    topics = Topic.objects.filter(published=True, approved=True)  # Only show approved topics
     return render(request, 'landing_page.html', {'topics': topics})
 
 def nuclear_facilities(request):
@@ -45,9 +46,9 @@ def educational_resources(request):
 
 @login_required
 def topic_detail(request, slug):
-    topic = get_object_or_404(Topic, slug=slug)
+    topic = get_object_or_404(Topic, slug=slug, approved=True)  # Only show approved topics
     comments = Comment.objects.filter(topic=topic, parent__isnull=True)  # Fetch only top-level comments
-    topics_with_likes = Topic.objects.filter(published=True).exclude(pk=topic.pk)  # Example for related topics
+    topics_with_likes = Topic.objects.filter(published=True, approved=True).exclude(pk=topic.pk)  # Example for related topics
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect(f"{reverse('login')}?next={request.path}")  # Redirect to login if user is not authenticated
@@ -91,11 +92,33 @@ def create_topic(request):
         if form.is_valid():
             topic = form.save(commit=False)
             topic.author = request.user
+            topic.approved = False  # Set initial approval status to False
             topic.save()
             return redirect('topic_detail', slug=topic.slug)
     else:
         form = TopicForm()
     return render(request, 'create_topic.html', {'form': form})
+
+@login_required
+def edit_topic(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    if request.method == 'POST':
+        form = TopicForm(request.POST, request.FILES, instance=topic)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.approved = False  # Reset approval status on edit
+            topic.save()
+            return redirect('topic_detail', slug=topic.slug)
+    else:
+        form = TopicForm(instance=topic)
+    return render(request, 'edit_topic.html', {'form': form, 'topic': topic})
+
+@login_required
+def request_approval(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    topic.approved = True  # Request approval
+    topic.save()
+    return redirect('topic_detail', slug=topic.slug)
 
 @login_required
 def create_comment(request, pk):
@@ -150,3 +173,18 @@ def register(request):
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
+
+@login_required
+def delete_topic(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    if request.method == 'POST':
+        topic.delete()
+        return redirect('landing_page')
+    return render(request, 'delete_topic.html', {'topic': topic})
+
+@staff_member_required
+def approve_topic(request, pk):
+    topic = get_object_or_404(Topic, pk=pk)
+    topic.approved = True
+    topic.save()
+    return redirect('admin_topic_list')  # Redirect to a list of topics pending approval

@@ -22,6 +22,7 @@ class Topic(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)  # New field for approval status
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
     image = CloudinaryField('image', blank=True, null=True, default='placeholder.png')

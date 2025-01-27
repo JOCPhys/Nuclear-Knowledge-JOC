@@ -18,6 +18,14 @@
         <p class="mr-3 mb-0"><small>{{ topic.comments.count }} comments</small></p>
         <p class="card-text mb-0" id="like-count-{{ topic.pk }}"><small>{{ like_count }} likes</small></p>
     </div>
+
+        <!-- Add buttons for editing, requesting approval, and deleting -->
+        {% if user == topic.author %}
+            <a href="{% url 'edit_topic' topic.slug %}" class="btn btn-warning mt-3">Edit Topic</a>
+            <a href="{% url 'request_approval' topic.slug %}" class="btn btn-success mt-3">Request Approval</a>
+            <a href="{% url 'delete_topic' topic.slug %}" class="btn btn-danger mt-3">Delete Topic</a>
+        {% endif %}
+
     <h5 id="add-comment">Add a Comment</h5>
     <form method="post" class="mb-4">
         {% csrf_token %}

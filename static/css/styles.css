@@ -32,6 +32,24 @@ header nav ul li a {
     text-decoration: none;
 }
 
+.navbar-nav .nav-item {
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    color: #f90303;
+    font-size: 1rem;
+}
+
+/* Ensure the "Create Topic" button is visible in the burger menu */
+.navbar-nav .nav-item .btn {
+    color: #f90303;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
 main {
     flex: 1;
     padding: 20px;
