@@ -19,9 +19,10 @@
         <p class="card-text mb-0" id="like-count-{{ topic.pk }}"><small>{{ like_count }} likes</small></p>
     </div>
     <h5 id="add-comment">Add a Comment</h5>
-    <form method="post" class="mb-4">
+    <form method="post" class="mb-4" id="comment-form">
         {% csrf_token %}
         {{ form.body }}
+        <input type="hidden" name="parent" value="">
         <div>
             <button type="submit" class="btn btn-primary add-comment-btn">Add Comment</button>
             <a href="{% category_url topic.category %}" class="btn btn-secondary return-category-btn">Return to {{ topic.get_category_display }}</a>
@@ -33,31 +34,31 @@
         {% for comment in comments %}
         <li class="comment mb-3">
             <p>{{ comment.body|safe }}</p>
-            <p> - Written by <strong>{{ comment.author.username }}</strong> on <strong>{{ comment.created_at }}</strong></p>
-            {% if comment.author == user %}
-                <div class="comment-buttons">            
+            <p>    - Written by <strong>{{ comment.author.username }}</strong> on <strong>{{ comment.created_at }}</strong></p>
+            <div class="comment-buttons"> 
+                <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
+                {% if comment.author == user %}
                     <a href="{% url 'edit_comment' comment.pk %}" class="comment-button edit">Edit</a>
                     <form method="post" action="{% url 'delete_comment' comment.pk %}" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="comment-button delete">Delete</button>
                     </form>
-                    <button class="comment-button reply reply-button" data-comment-id="{{ comment.pk }}">Reply</button>
-                </div>
-            {% endif %}
+                {% endif %} 
+            </div>
             <ul class="reply-list list-unstyled ml-4">
                 {% for reply in comment.ordered_replies %}
                 <li class="reply mb-2">
                     <p>{{ reply.body|safe }}</p>
-                    <p><em> - Reply from {{ reply.author.username }} on {{ reply.created_at }}</em></p>
-                    {% if reply.author == user %}
-                        <div class="comment-buttons">
+                    <p><em>       - Reply from {{ reply.author.username }} on {{ reply.created_at }}</em></p>
+                    <div class="comment-buttons">
+                        {% if reply.author == user %}
                             <a href="{% url 'edit_comment' reply.pk %}" class="comment-button edit">Edit</a>
                             <form method="post" action="{% url 'delete_comment' reply.pk %}" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="comment-button delete">Delete</button>
                             </form>
-                        </div>
-                    {% endif %}
+                            {% endif %}
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
@@ -65,4 +66,19 @@
         {% endfor %}
     </ul>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const replyButtons = document.querySelectorAll('.reply-button');
+    replyButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            const commentId = this.getAttribute('data-comment-id');
+            const form = document.getElementById('comment-form');
+            const parentInput = form.querySelector('input[name="parent"]');
+            parentInput.value = commentId;
+            form.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+});
+</script>
 {% endblock %}
