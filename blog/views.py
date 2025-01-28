@@ -110,6 +110,22 @@ def create_topic(request):
     return render(request, 'create_topic.html', {'form': form})
 
 @login_required
+
+def request_approval(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    topic.approved = True  # Request approval
+    topic.save()
+    return redirect('topic_detail', slug=topic.slug)
+
+@login_required
+def delete_topic(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    if request.method == 'POST':
+        topic.delete()
+        return redirect('landing_page')
+    return render(request, 'delete_topic.html', {'topic': topic})
+
+@login_required
 def create_comment(request, pk):
     topic = get_object_or_404(Topic, pk=pk)
     if request.method == 'POST':
@@ -137,7 +153,6 @@ def edit_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.user != comment.author:
         return redirect('topic_detail', slug=comment.topic.slug)
-
     if request.method == 'POST':
         form = CommentEditForm(request.POST, instance=comment)
         if form.is_valid():
@@ -145,8 +160,21 @@ def edit_comment(request, pk):
             return redirect('topic_detail', slug=comment.topic.slug)
     else:
         form = CommentEditForm(instance=comment)
-
     return render(request, 'blog/edit_comment.html', {'form': form, 'comment': comment})
+
+@login_required
+def edit_topic(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    if request.method == 'POST':
+        form = TopicForm(request.POST, request.FILES, instance=topic)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.approved = False  # Reset approval status on edit
+            topic.save()
+            return redirect('topic_detail', slug=topic.slug)
+    else:
+        form = TopicForm(instance=topic)
+    return render(request, 'edit_topic.html', {'form': form, 'topic': topic})
 
 def register(request):
     if request.method == 'POST':
@@ -159,6 +187,21 @@ def register(request):
     else:
         form = SignupForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+@login_required
+def delete_topic(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    if request.method == 'POST':
+        topic.delete()
+        return redirect('landing_page')
+    return render(request, 'delete_topic.html', {'topic': topic})
+
+@login_required
+def request_approval(request, slug):
+    topic = get_object_or_404(Topic, slug=slug, author=request.user)
+    topic.approved = True  # Request approval
+    topic.save()
+    return redirect('topic_detail', slug=topic.slug)
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'

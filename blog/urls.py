@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (
     landing_page,
     nuclear_facilities,
@@ -9,6 +9,9 @@ from .views import (
     educational_resources,
     topic_detail,
     create_topic,
+    edit_topic,
+    request_approval,
+    delete_topic, 
     create_comment,
     delete_comment,
     edit_comment,
@@ -26,8 +29,11 @@ urlpatterns = [
     path('topic/nuclear-power-space/', nuclear_power_space, name='nuclear_power_space'),
     path('topic/fact-or-fiction/', fact_or_fiction, name='fact_or_fiction'),
     path('topic/educational-resources/', educational_resources, name='educational_resources'),
-    path('topic/<slug:slug>/detail/', topic_detail, name='topic_detail'),
+    path('topic/<slug:slug>/', topic_detail, name='topic_detail'),
     path('create_topic/', create_topic, name='create_topic'),
+    path('topic/<slug:slug>/edit/', edit_topic, name='edit_topic'),
+    path('topic/<slug:slug>/request_approval/', request_approval, name='request_approval'),
+    path('topic/<slug:slug>/delete/', delete_topic, name='delete_topic'),
     path('topic/<int:pk>/create_comment/', create_comment, name='create_comment'),
     path('comment/<int:pk>/delete/', delete_comment, name='delete_comment'),
     path('edit_comment/<int:pk>/', edit_comment, name='edit_comment'),
@@ -35,4 +41,6 @@ urlpatterns = [
     path('register/', register, name='account_signup'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-]
+    path('accounts/', include('allauth.urls')),
+    path('summernote/', include('django_summernote.urls')),
+]   

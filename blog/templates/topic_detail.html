@@ -16,8 +16,17 @@
     <p class="author-info"><strong>Created by {{ topic.author }} on {{ topic.created_at }}</strong></p>
     <div class="d-flex justify-content-start">
         <p class="mr-3 mb-0"><small>{{ topic.comments.count }} comments</small></p>
-        <p class="card-text mb-0" id="like-count-{{ topic.pk }}"><small>{{ like_count }} likes</small></p>
+        <p class="card-text mb-0" id="like-count-{{ topic.pk }}"><small>{{ topic.likes.count }} likes</small></p>
     </div>
+
+    {% if user.is_authenticated and user == topic.author %}
+        <a href="{% url 'edit_topic' topic.slug %}" class="btn btn-warning mt-3">Edit Topic</a>
+        {% if not topic.approved %}
+            <a href="{% url 'request_approval' topic.slug %}" class="btn btn-success mt-3">Request Approval</a>
+        {% endif %}
+        <a href="{% url 'delete_topic' topic.slug %}" class="btn btn-danger mt-3">Delete Topic</a>
+    {% endif %}
+
     <h5 id="add-comment">Add a Comment</h5>
     <form method="post" class="mb-4" id="comment-form">
         {% csrf_token %}
@@ -57,7 +66,7 @@
                                 {% csrf_token %}
                                 <button type="submit" class="comment-button delete">Delete</button>
                             </form>
-                            {% endif %}
+                        {% endif %}
                     </div>
                 </li>
                 {% endfor %}
@@ -73,10 +82,39 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const commentId = this.getAttribute('data-comment-id');
-            const form = document.getElementById('comment-form');
-            const parentInput = form.querySelector('input[name="parent"]');
-            parentInput.value = commentId;
-            form.scrollIntoView({ behavior: 'smooth' });
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            // Remove any existing reply forms
+            const existingReplyForm = document.querySelector('.reply-form');
+            if (existingReplyForm) {
+                existingReplyForm.remove();
+            }
+
+            // Create a new reply form
+            const replyForm = document.createElement('form');
+            replyForm.method = 'post';
+            replyForm.classList.add('reply-form');
+            replyForm.innerHTML = `
+                <input type="hidden" name="csrfmiddlewaretoken" value="${csrfToken}">
+                <input type="hidden" name="parent" value="${commentId}">
+                <textarea name="body" class="form-control" rows="3" required></textarea>
+                <button type="submit" class="btn btn-primary mt-2 comment-button">Reply</button>
+                <button type="button" class="btn btn-secondary mt-2 comment-button cancel-reply-btn">Cancel</button>
+            `;
+            this.parentElement.appendChild(replyForm);
+
+            // Add event listener for Enter/Return key
+            replyForm.querySelector('textarea').addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    replyForm.submit();
+                }
+            });
+
+            // Add event listener for Cancel button
+            replyForm.querySelector('.cancel-reply-btn').addEventListener('click', function() {
+                replyForm.remove();
+            });
         });
     });
 });
