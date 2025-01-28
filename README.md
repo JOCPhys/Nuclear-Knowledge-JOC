@@ -7,15 +7,12 @@
 # Nuclear Physics Blog App - Nuclear Knowledge 
 <img width="612" alt="Nuclear Knowledge landing page views on various device sizes" src="readme.docs/responsive_landing page.png">
 
-TO DO (link to live page)######
-![Nuclear Knowledge](https://github.com/#######)
 
+link to Heroku (live page)
+> [View live project here](https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/)
 
-TO DO ###### link to Heroku 
-> [View live project here](https://nature-blog-5d97cb035a15.herokuapp.com/)
-
-TO DO ######
-For Admin access with relevant sign-in information: [Nuclear Knowledge blog Admin](https://)
+Github link 
+> [view Github repo here](https://jocphys-nuclearknowledg-k332bmo63z4.ws.codeinstitute-ide.net)
 > 
 > This is an information resource to share and create blog posts about the many aspects of Nuclear physics. Users can read and comment and reply on each post so that they can share their thoughts and ideas and feel part of the wider scientific community.
 ---
@@ -49,12 +46,51 @@ For Admin access with relevant sign-in information: [Nuclear Knowledge blog Admi
  ---
  ## USER EXPERIENCE
  ---
-**Database Planning**  TO DO ######
+**Database Planning** 
 
-I used [LucidChart](https://lucid.app/documents#/home?folder_id=recent) to create my ERD for my database. It is a simple model with only four models: User, Post, Comment and Category.
+I wanted to use [LucidChart](https://lucid.app/documents#/home?folder_id=recent) to create my ERD for my database. However, how they link will be provided in the next sprint. HSere are the basic ERDs for the Topic model and Comment model:
+
+**User Model**
+
+| Field Name | Data Type  | Constraints                  |
+|------------|------------|------------------------------|
+| id         | Integer    | Primary Key, Auto Increment  |
+| username   | CharField  | max_length=150, Unique       |
+| email      | EmailField | Unique                       |
+| password   | CharField  | max_length=128               |
+
+**Topic Model**
+
+| Field Name       | Data Type          | Constraints                                      |
+|------------------|--------------------|--------------------------------------------------|
+| id               | Integer            | Primary Key, Auto Increment                      |
+| title            | CharField          | max_length=200, Required                         |
+| slug             | SlugField          | max_length=300, Unique, Blank=True               |
+| content          | TextField          | Required                                         |
+| excerpt          | TextField          | Blank=True, Null=True                            |
+| created_at       | DateTimeField      | auto_now_add=True                                |
+| updated_at       | DateTimeField      | auto_now=True                                    |
+| published        | BooleanField       | Default=False                                    |
+| author           | ForeignKey(User)   | on_delete=models.CASCADE                         |
+| likes            | ManyToManyField(User) | related_name='liked_topics', Blank=True         |
+| image            | CloudinaryField    | Blank=True, Null=True, Default='placeholder.png' |
+| alt_description  | CharField          | max_length=255, Blank=True, Null=True            |
+| category         | CharField          | max_length=200, choices=CATEGORY_OPTION, Default='nuclear_facilities' |
+
+**Comment Model**
+
+| Field Name       | Data Type          | Constraints                                      |
+|------------------|--------------------|--------------------------------------------------|
+| id               | Integer            | Primary Key, Auto Increment                      |
+| topic            | ForeignKey(Topic)  | on_delete=models.CASCADE, related_name='comments'|
+| author           | ForeignKey(User)   | on_delete=models.CASCADE                         |
+| body             | TextField          | Required                                         |
+| created_at       | DateTimeField      | auto_now_add=True                                |
+| updated_at       | DateTimeField      | auto_now=True                                    |
+| parent           | ForeignKey('self') | Null=True, Blank=True, on_delete=models.CASCADE, related_name='replies' |
+
 The User model was imported from Django Allauth
 
-![erd](https://github.com/user-attachments/assets/81a2689c-789b-4e01-8810-a91b1193002a)
 
 **Purpose and Intended Audience**
 
