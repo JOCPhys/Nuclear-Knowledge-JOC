@@ -4,26 +4,29 @@
 > 
 > 
 
-# Nature blog
-![Nature on my doorstep](https://github.com/user-attachments/assets/3b5f2d10-8103-4d8a-9c39-f8ce6608fd0f)
+# Nuclear Physics Blog App - Nuclear Knowledge 
+<img width="612" alt="Screenshot of Nuclear Knowledge landing page" src="readme.docs/landing_page.png">
+
+TO DO (link to live page)######
+![Nuclear Knowledge](https://github.com/#######)
 
 
-
+TO DO ###### link to Heroku 
 > [View live project here](https://nature-blog-5d97cb035a15.herokuapp.com/)
 
+TO DO ######
 For Admin access with relevant sign-in information: [Nature blog Admin](https://nature-blog-5d97cb035a15.herokuapp.com/admin/)
 > 
-> This is my nature blog which allows me to create blog posts about the wildlife in my garden.
-> Users can read and comment on each post that they can share their thoughts and ideas and feel part of a wider community helping nature to thrive.
+> This is an information resource to share and create blog posts about the many aspects of Nuclear physics. Users can read and comment and reply on each post so that they can share their thoughts and ideas and feel part of the wider scientific community.
 ---
 > 
-<img width="937" alt="Screenshot 2024-10-04 at 10 42 39" src="https://github.com/user-attachments/assets/87d34c2d-0bd4-432c-8575-04ed47dc3f52">
+
 
 
 >
 ---
 
-## CONTENTS
+## CONTENTS   TO DO #####
 
  - [User experience (UX)](#user-experience)
      - database planning
@@ -43,13 +46,14 @@ For Admin access with relevant sign-in information: [Nature blog Admin](https://
  - [Tablet/mobile view](#tablet/mobile-view)
  - [Future features](#future-features)
  - [Technologies used](#technologies-used)
+ - [Ai Augmentation](#ai-augmentation) 
  - [Deployment](#deployment)
  - [Testing](#testing)
  - [Credits](#credits)
  ---
  ## USER EXPERIENCE
  ---
-**Database Planning**
+**Database Planning**  TO DO ######
 
 I used [LucidChart](https://lucid.app/documents#/home?folder_id=recent) to create my ERD for my database. It is a simple model with only four models: User, Post, Comment and Category.
 The User model was imported from Django Allauth
@@ -58,37 +62,38 @@ The User model was imported from Django Allauth
 
 **Purpose and Intended Audience**
 
-My intention was to design a website which allowed me to showcase the amazing wildlife I found in my garden and the work I have done to increase the species diversity. At the same time I wanted people to visit and feel involved by being able to comment and give their own experiences and tips for me and everyone in the community.
-By adding the category model to the project I wanted to make it easier for users to identify the posts which interested them most and which they could engage with.
+This website serves as an educational resource dedicated to the fascinating field of Nuclear Physics. Designed to cater to diverse interests, the site offers a wealth of information spanning various aspects of this scientific discipline. Our goal is to make Nuclear Physics accessible and engaging for individuals of all ages.
 
+The site invites users to immerse themselves in the scientific community by exploring a wide array of topics and categories within Nuclear Physics. By encouraging users to like, comment on, and reply to individual topic posts, we foster a conversational and interactive environment. This approach allows users to fully engage in scientific discussions, whether as contributors with advanced academic knowledge or as newcomers experiencing their first taste of participating in a scientific community. It is desined to be responsive so that users can access the content on any type of device.
 
 **User stories**
 		 
-| User story | MoSCoW prioritisation |
-| --- | --- |
-| As a **User** I can **use a navigation links** so that **access other areas of the site easily** | Must have |
-| As a **user** I can **click the home page icon** so that **I can quickly and easily return to the home page** | Must have |
-| As a **user** I can **click on the about page link** so that **find out more information about the site** | Must have |
-| As a **user** I can **navigate the social links** so that **connect with the site via social media** | Must have |
-| As a **user** I can **open a blog post** so that **I can get the full information on a post I am interested in** | Must have |
- | As a **user/admin** I can **view comments on individual posts** so that **I can follow the conversation** | Must have |
- | As a **user/admin** I can **comment on posts** so that **I can take part in the conversation and be a part of the community** | Must have |
- | As a **user** I can **edit or delete my comments on a post** so that **I can be involved in the conversation and community** | Must have |
- | As a **user** I can **use my email and a password to register an account** so that **I can interact with the community and leave comments on posts** | Must have |
- | As a **site admin** I can **moderate user comments** so that **nothing inappropriate or offensive is added to the site** | Must have |
- | As a **user** I can **filter the blog posts based on their category** so that **see posts that match my interests** | Must have |
- | As a **site admin** I can **create new blog posts** so that **my audience has up to date and new content to enjoy** | Must have |
- | As a **site admin** I can **edit or delete blog posts** so that **users have the correct content and mistakes can be rectified** | Must have |
- | As a **site admin** I can **create and assign post categories** so that **users are able to filter the blog posts for a more tailored experience** | Must have |
- | As a **user** I can **search for blog posts using keywords** so that **get the specific information I need more quickly** | Should have |
- | As a **user** I can **see the most recent posts in a sidebar** so that **I have access to the most recent information quickly** | Won't have |
- | As a **user** I can **share posts on social media platforms** so that **I can interact with other users and a wider community** | Won't have |
- | As a **user** I can **view a separate page showing activities available to book** so that **I can interact with nature and learn more** | Won't have |
- | As a **user** I can **navigate to a separate gallery page** so that **I can enjoy more content in an enjoyable way** | Won't have |
+Title | User story | MoSCoW prioritisation |
+--- | --- | --- |
+**Account Registration** | As a **site user** I can **register an account** so that I can **view the topic pages** | Must have |
+**View list of blog posts** | As a **site user** I can **view a list of blog posts from a topic page** so that **I can select which post to view** | Must have |
+**Open Post** | As a **site user** I can **click on a post** so that **I can read the full text** | Must have |
+**View Comments** | As a **site user** I can **view comments on an individual post** so that **I can read the conversation** | Must have |
+**Comment on a Post** | As a **site user** I can **create comments on a post** so that **I can be involved in a conversation** | Must have |
+ **Modify or delete comments on a post** | As a **site user** I can **edit/modify or delete my comments on posts** so that **I can take part in a conversation, and manage the conversation content** | Must have |
+**Manage Posts** | As a **site admin** I can **create, read and update posts** so that **I can manage my blog content** | Must have |
+ **Access topic pages from a main landing page**| As a **site user** I can **view the topics available** so that **I can select topics that contain blogs of interest within a topic category** | Should have |
+ **Create Drafts**| As a **site admin** I can **create draft blog posts** so that **I can finish the content later** | Should have |
+ **Share Resources** | As a **teacher** I can **upload and download educational resources** so that **I can share materials with studetns and colleagues** | Could have |
+ **Create blog posts** | As a **site user** I can **create new blog posts** so that **my audience has up to date and new content to enjoy** | Could have |
+ **Modify or delete User blog posts** | As a **User blog author** I can **edit or delete the blog posts I have created** so that **I can keep blog posts relevant, and I am able to correct mistakes** | Could have |
+ **Notifications**| As a **site user** I can **recieve notifications** when **other users comment on the same post/on posts the user has created** | Could have |
  
-I used [GitHub Projects](https://github.com/users/helproudman/projects/4/views/2) to create my project board and populated it with my user stories and added labels according to MoSCoW prioritisation.
-All of the 'must have' user stories were completed with any other issues being carried over to the next phase of the project development.
-Each user story had acceptance criteria added. The key user stories and acceptance criteria are listed below with evidence of how I completed each issue:
+ 
+I used [GitHub Projects](https://github.com/users/JOCPhys/projects/13) to create a project board and populated it with user stories and added labels according to MoSCoW prioritisation.
+All of the 'must have' user stories were completed with any other issues being carried over to the next sprint of the project development.
+
+[Project Board](readme.docs/project_board_Moscow_labels.png)
+
+Each user story had acceptance criteria added. 
+
+TO DO ######
+The key user stories and acceptance criteria are listed below with evidence of how I completed each issue:
 
 ![User story 14 - Create new blog posts](https://github.com/user-attachments/assets/396cb671-4df6-4a6a-8aa1-99bcfd71b78e)
 Acceptance criteria:
@@ -115,22 +120,21 @@ This user story also contributed towards the CRUD functionality and was tested t
 ## CREATION PROCESS
 
   ### Wireframes
-  I only created wire frames for the pages I intended to create myself. All login and registration forms were created by allauth and as such I haven't provided wire frames.
+  I created basic wireframes using Balsamiq. All login and registration forms were created by allauth and as such I haven't provided wire frames.
 <details open>
-<summary>Blog page wireframes for mobile and desktop</summary>
-<img width="1080" alt="Blog page mobile and large screen" src="https://github.com/user-attachments/assets/7bf359f9-8291-4d1d-a806-482b8ea5c93e">
-
-  
+<summary>Landing page wireframe with the list of Catergories/Topics to view for desktop, tablet and mobile devices</summary>
+<img width="1080" alt="Landing page wireframe" src="readme.docs/home-page-wireframe-basic.jpg">
 </details>
 
 <details>
-<summary>Blog detail wireframes for mobile and desktop</summary>
-
-  <img width="1080" alt="blog post detail" src="https://github.com/user-attachments/assets/9f94cd74-4afe-4984-8455-f962e58bd48b">
-
+<summary>Category/Topic Pages (example of 1 of 6 category pages) wireframe for desktop, tablet and mobile devices</summary>
+<img width="1080" alt="Topic page wireframe" src="readme.docs/wireframes-category-page-basic.jpg">
 </details>
 
-
+<details>
+<summary>Topic detail wireframe for an indivdual Topic-Blog detail page with comments feature for desktop, tablet and mobile devices</summary>
+<img width="1080" alt="Topic page wireframe" src="readme.docs/wireframes-blog-detail-basic.jpg">
+</details>
 
 ---
 
@@ -166,31 +170,44 @@ This user story also contributed towards the CRUD functionality and was tested t
 
  ---
 
-## WEBSITE FEATURES
+## WEBSITE FEATURES TO COMPLETE######
 
 
   **MAIN VIEW**
   <details open>
   <summary>landing page</summary
-  ![home-page](https://github.com/user-attachments/assets/72eefb0f-81d3-41d5-b856-bfa8198ccf6b)
+  ![home-page](https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/)
 
 
   </details>
-  I decided to have users arrive directly on the blog post page rather than requiring them to log in or register before being able to see anything. 
-  I felt it would draw people in more and encourage them to then register and get involved.
-  There are clear messages to tell the user whether they are logged in or not
+  Users arrive directly on the landing page which outlines the 6 categories of topics available immediately rather than requiring them to log in or register before being able to see anything. 
+  I felt it would draw people in more and encourage them to then sign-up in order to see more.
+  
+
+<br>
+
+**TOPIC CATEGORIES VIEW** TO COMPLETE IMAGE LINKS ######
+<details open>
+  <summary>Example of a Topic Category page</summary
+  [topic-page] <img width="332" alt="Topic Page 'Fact or Fiction' view shows 6 topic blogs" src="readme.docs/fact_or_fiction_topic_page_view.png">
+  (https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/topic/fact-or-fiction/)
+
+
+  </details>
+  Users choose one of 6 categories of topics available on the landing page. They will be required to sign-in/register to access these pages. Each of these pages has a minimum of 6 indivdual topic-blogs displayed as cards that each display the title of the topic, a relevant topic image, the author of the blog, an excerpt and an invite to comment. The number of likes and number of comments is displayed to entice other users to join.A click anywhere on the card will take the user to the topic blog detail.
+  
 
 <br>
     
-  **BLOG POST DETAIL VIEW**
+  **TOPIC-BLOG POST DETAIL VIEW**
   <details>
-  <summary>The detailed view of each </summary>
+  <summary>The detailed view of each blog </summary>
 					     
-  ![post-detail](https://github.com/user-attachments/assets/03b2cda8-1505-4bd3-9fe2-8fcd2cf7ca2d)
+  ![post-detail](https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/topic/nuclear-power-in-space-exploration-an-overview/)
 
   
   </details>
-  Each blog post is shown with the image and the detail of the post in a font I chose to make it appear as though it was an entry in a diary. 
+  Each topic blog post is shown with the image and the full detail of the post, displaying the number of 'likes' and the number of 'comments'. Users can reply to comments. Comments and replies can be edited. 
 
   <br>
 
@@ -212,8 +229,7 @@ This user story also contributed towards the CRUD functionality and was tested t
 
 
 
-  The footer gives links to social sites and GitHub. The colour was chosen to match the header and fit in with the overall 
-  colour scheme.
+  The footer gives links to social sites and GitHub. The colour was chosen to match the header and fit in with the overall colour scheme.
 
 
 
@@ -222,107 +238,60 @@ This user story also contributed towards the CRUD functionality and was tested t
 
 ## FUTURE FEATURES
 The following would be options to consider including in future versions of the website:
-  - an about page for information about the developer
+
+Next Sprint: 
+  - Users have an option to contribute to any of the topics by creating a blog without the need for access to the admin panel, can save it as draft and continue to edit - although final approval for publishing would be at the discretion of the admin or trusted staff Users can view their own completed or partially completed published and unpublished blogs on their own 'My Topics' page. NOTE- this is partially developed at this stage but full functionality not yet complete. 
+
+Additional Sprints:
+  - The 'Educational Resources' page to be developed as a sharing page for educators to upload and download educational resources for the teaching and learning of Nuclear physics. 
+
+  - An about page for information about each of the topic-blog creators - invite to a user who has created 10 successfully published blogs. 
     
-  - an option for users to create their own blog posts
+  - Topic-blog authors can receive notifications (via a preferred method eg email or in-app) when other users comment on a blog-topic they have publsihed
     
-  - a way for users to take part in some citizen science where they can document species they have seen in their gardens
-
-  - a booking site where users can book nature activities
-
-  - a gallery page of users pictures
-
-
 
 ## TECHNOLOGIES USED
 
-  ### Languages used
-  - HTML5
+  ### Languages Used
 
-  - CSS
+![Python](https://img.shields.io/badge/Python-3.8-blue)
+![asgiref](https://img.shields.io/badge/asgiref-3.8.1-blue)
+![cloudinary](https://img.shields.io/badge/cloudinary-1.41.0-blue)
+![dj-database-url](https://img.shields.io/badge/dj--database--url-0.5.0-blue)
+![gunicorn](https://img.shields.io/badge/gunicorn-20.1.0-blue)
+![oauthlib](https://img.shields.io/badge/oauthlib-3.2.2-blue)
+![psycopg](https://img.shields.io/badge/psycopg-3.2.1-blue)
+![PyJWT](https://img.shields.io/badge/PyJWT-2.9.0-blue)
+![python3-openid](https://img.shields.io/badge/python3--openid-3.2.0-blue)
+![requests-oauthlib](https://img.shields.io/badge/requests--oauthlib-2.0.0-blue)
+![sqlparse](https://img.shields.io/badge/sqlparse-0.5.1-blue)
+![urllib3](https://img.shields.io/badge/urllib3-1.26.19-blue)
+![whitenoise](https://img.shields.io/badge/whitenoise-5.3-blue)
 
-  - JavaScript
+### Frameworks, Libraries, and Programs Used
 
-  - Python
-   - asgiref==3.8.1
-   - cloudinary==1.41.0
-   - dj-database-url==0.5.0
-   - gunicorn==20.1.0
-   - oauthlib==3.2.2
-   - psycopg==3.2.1
-   - PyJWT==2.9.0
-   - python3-openid==3.2.0
-   - requests-oauthlib==2.0.0
-   - sqlparse==0.5.1
-   - urllib3==1.26.19
-   - whitenoise==5.3.0
-     
-
-  - Django
-    - summernote==0.8.20.0
-    - allauth==0.57.2
-    - crispy-forms==2.3
-
-  ### Frameworks, libraries and programs used
-
-   
-  1. [Bootstrap 4.6](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
-        - Bootstrap was used to ensure the site was responsive and for styling
-  2. [Balsamiq](https://balsamiq.com/wireframes/)   
-        - Balsamiq was used to produce the wireframes in the design phase.
-  3. [Git](https://git-scm.com/)
-        - Git was used for version control
-  4. [Github](https://github.com/)
-        - GitHub was used to store the code and allow collaboration on the project.
-  5. [Contrast Finder](https://app.contrast-finder.org/?lang=en)
-        - Contrast Finder was used to check the contrast between text colour and background image
-  6. [Tiny.PNG](https://tinypng.com/)
-        - Tiny.PNG was used to compress images
-  7. [StackEdit](https://stackedit.io/)
-        - StackEdit was used to assist with the markdown in the README.md
-  8. [Google Chrome Dev Tools](https://developer.chrome.com/docs/devtools)
-        - Used to troubleshoot and test design ideas and styling.   
-  9.  [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview)  
-        - used to test performance of the website
-  10. [Favicon](https://favicon.io/)
-        - used to generate the favicon  
-  11. [W3 Schools](https://www.w3schools.com/)
-        - used to look up syntax for HTML and CSS
-  12. [Stack Overflow](https://stackoverflow.com/)                  
-        - used for queries around coding
-  13. [Perplexity](https://www.perplexity.ai/)    
-        - used to provide sources to generate text for the website   
-  14. [Wikipedia](https://www.wikipedia.org/)      
-        - used to generate text
-  15. [Wave web accessibility evaluation tool](https://wave.webaim.org/)
-        - used to supply the weather API
-  16. [Font Awesome](https://fontawesome.com/)    
-        - used for the favicon
-  17. [Pexels](https://www.pexels.com/)
-        - used for copyright free images
-  18. [W3C HTML validator](https://validator.w3.org/)
-        - used to validate the HTML
-  19. [W3 Jigsaw](https://jigsaw.w3.org/css-validator/)
-        - used to validate the CSS
-  20. [JSHint](https://jshint.com/)
-        - used to validate the JavaScrip
-  21. [Python Enhancement Proposals](https://peps.python.org/pep-0008/)
-        - for advice on PEP8 compliance
-  22. [Free Code Camp](https://freecodecamp.org)   
-        - for help with JavaScript concepts and syntax 
-  23. [Code Academy](https://codeacademy.com)   
-        - for help with JavaScript concepts and syntax  
-  24. [Code explained repository on GitHub](https://github.com/CodeExplainedRepo/Weather-App-JavaScript)
-        - for help setting up a weather app using an API
-  25. [Claude AI](https://claude.ai/)
-         - for help with code queries
-  26. [Adobe Color](https://color.adobe.com/create/color-wheel)
-        
-  28. [Django framework](https://www.djangoproject.com/)
-  29. [Django Project - Build a simple blog tutorial](https://www.youtube.com/watch?v=S9-Bt1JgRjQ&list=PLOLrQ9Pn6cawWd-5UZM6CIm0uqFXeBcTd&index=5)
-  30. [CI Python Linter](https://pep8ci.herokuapp.com/) - for validating Python code
-  31. [Heroku](https://dashboard.heroku.com/apps)
-
+![Bootstrap](https://img.shields.io/badge/Bootstrap-4.6-blue)
+![Balsamiq](https://img.shields.io/badge/Balsamiq-Wireframes-orange)
+![Git](https://img.shields.io/badge/Git-2.32.0-brightgreen)
+![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)
+![Contrast Finder](https://img.shields.io/badge/Contrast%20Finder-Tool-yellow)
+![TinyPNG](https://img.shields.io/badge/TinyPNG-Image%20Compression-green)
+![Chrome Dev Tools](https://img.shields.io/badge/Chrome%20Dev%20Tools-Tool-blue)
+![Lighthouse](https://img.shields.io/badge/Lighthouse-Performance-orange)
+![Favicon.io](https://img.shields.io/badge/Favicon.io-Tool-yellow)
+![W3Schools](https://img.shields.io/badge/W3Schools-Resource-green)
+![Stack Overflow](https://img.shields.io/badge/Stack%20Overflow-Resource-orange)
+![Perplexity](https://img.shields.io/badge/Perplexity-Tool-lightgrey)
+![Wikipedia](https://img.shields.io/badge/Wikipedia-Resource-blue)
+![Wave](https://img.shields.io/badge/Wave-Accessibility%20Tool-brightgreen)
+![Font Awesome](https://img.shields.io/badge/Font%20Awesome-Icons-blue)
+![W3C HTML Validator](https://img.shields.io/badge/W3C%20HTML%20Validator-Pass-brightgreen)
+![W3C CSS Validator](https://img.shields.io/badge/W3C%20CSS%20Validator-Pass-brightgreen)
+![JSHint](https://img.shields.io/badge/JSHint-JavaScript%20Validator-yellow)
+![PEP8](https://img.shields.io/badge/PEP8-Python%20Style%20Guide-blue)
+![Adobe Color](https://img.shields.io/badge/Adobe%20Color-Tool-orange)
+![Django](https://img.shields.io/badge/Django-Framework-green)
+![CI Python Linter](https://img.shields.io/badge/CI%20Python%20Linter-Pass-brightgreen)
 
 
  ---
@@ -379,15 +348,16 @@ The following Unit Tests were performed:
 
 I have used the W3C Markup validator to validate all of my HTML code - [W3C Markup Validator](https://validator.w3.org/)
 
-A different approach was required for validating the HTML for this project as all of the pages are developed using DTL and most require user authentication. The HTML validator will throw errors if I were to use the URL so I followed the below approach for every page:
+Pages in this project are developed using DTL and all except the landing page (and login, logout and sign-up pages which are Django admin tools that I have no control over) require user authentication. The HTML validator will throw errors if I were to use the URL so I followed the below approach for the landing page and the templates:
   - navigate to the deployed Heroku link
   - right click to find the 'view page source' link
   - copy and paste the HTML code from here into the validator via the direct input
 
 [home page html validation](readme.docs/landing_page_validation.png)
+[A topic page html validation](readme.docs/a_topic_page_validation.png)
 
-All HTML was checked and had no errors or warnings to show as indicated above. 
-The home (landing) page some initial syntax errors which were identified and corrected and then commited the code and the validation was clear.
+HTML was checked and had no errors or warnings to show as indicated above. 
+The home (landing) page had some initial syntax errors which were identified and corrected and then commited the code and the validation was clear.
 
    ### CSS validation
 
@@ -395,11 +365,11 @@ The home (landing) page some initial syntax errors which were identified and cor
 
 [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) was used to validate the CSS file. External CSS for Bootstrap, provided by [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css) was not tested.
 
-   ### Javascript validation
+   ### Javascript validation  TO DO ######
 
   [JavaScript Validator](https://jshint.com) - the JavaScript validation did not throw up and issues. The fact that the use of let and const to define variables and template literals is only available with ES6 was highlighted.
 
-   ### Python validation
+   ### Python validation TO DO ######
 [CI Python Linter](https://pep8ci.herokuapp.com/#) was used to validate the python files I created or edited myself.
 Initial errors were thrown up involving line length of comments and spacing but these were corrected.    
 
