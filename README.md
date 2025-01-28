@@ -353,24 +353,47 @@ Navigate to Deploy tab
 
 ## TESTING
 
+ ### Unit Tests
+
+The following Unit Tests were performed:
+
+| Test Category            | Test Description                                                                 |
+|--------------------------|----------------------------------------------------------------------------------|
+| **Test Setup**           | Initializes test data, including creating a regular user, an admin user, and a sample topic. |
+| **Test Topic Detail Page** | Verifies that the topic detail page renders correctly with the topic details when accessed by an admin user. |
+|                          | Ensures that the create topic page renders correctly and uses the appropriate template. |
+|                          | Confirms that the edit topic page renders correctly and uses the appropriate template. |
+|                          | Checks that the delete topic page renders correctly and uses the appropriate template. |
+| **Test Forms**           | Ensures that the comment form is valid when provided with valid data.             |
+|                          | Verifies that the comment form is invalid when provided with empty data.          |
+|                          | Confirms that the topic form is valid when provided with valid data.              |
+|                          | Ensures that the topic form is invalid when provided with empty data.             |
+| **Test Models**          | Verifies that the string representation of the topic model returns the topic title. |
+|                          | Ensures that the string representation of the comment model returns the first 20 characters of the comment body. |
+| **Test Comment Functionality** | Verifies that a comment can be added to a topic.                              |
+|                          | Ensures that a comment can be edited.                                             |
+|                          | Confirms that a comment can be deleted.                                           |
+
+
   ### HTML validation
 
 I have used the W3C Markup validator to validate all of my HTML code - [W3C Markup Validator](https://validator.w3.org/)
 
-A different approach was required for validating the HTML for this project as all of the pages are developed using DTL and most require user authentication. The HTML validator will throw errors if I were to use the URL so I have had to follow the below approach for every page:
+A different approach was required for validating the HTML for this project as all of the pages are developed using DTL and most require user authentication. The HTML validator will throw errors if I were to use the URL so I followed the below approach for every page:
   - navigate to the deployed Heroku link
   - right click to find the 'view page source' link
   - copy and paste the HTML code from here into the validator via the direct input
 
-[home page html validation](readme.docs/home-page-html.png)
+[home page html validation](readme.docs/landing_page_validation.png)
 
 All HTML was checked and had no errors or warnings to show as indicated above. 
-The home page had an initial error where I had nested a <p> within a <span> but I corrected this and commited the code and the validation was clear.
+The home (landing) page some initial syntax errors which were identified and corrected and then commited the code and the validation was clear.
 
    ### CSS validation
 
-[CSS validation](readme.docs/css-validation.png)
-[W3C CSS Validator](https://jigsaw.w3.org/css-validator/) was used to validate my CSS file. External CSS for Bootstrap, provided by [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css) was not tested.
+[CSS validation](readme.docs/css_validation.png)
+
+[W3C CSS Validator](https://jigsaw.w3.org/css-validator/) was used to validate the CSS file. External CSS for Bootstrap, provided by [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css) was not tested.
 
    ### Javascript validation
 
