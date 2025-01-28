@@ -4,6 +4,7 @@ from django.test import TestCase
 from .forms import CommentForm, TopicForm, CommentEditForm
 from .models import Topic, Comment
 
+
 class TestTopicViews(TestCase):
 
     def setUp(self):
@@ -26,11 +27,12 @@ class TestTopicViews(TestCase):
             content="Topic content",
             published=True
         )
-        self.client.logout()  # Ensure the client is logged out for the next test
+        self.client.logout()
 
     def test_render_topic_detail_page_with_comment_form(self):
         self.client.login(username="adminUser", password="adminPassword")
-        response = self.client.get(reverse('topic_detail', args=['topic-title']))
+        response = self.client.get(reverse('topic_detail',
+            args=['topic-title']))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Topic title", response.content)
         self.assertIn(b"Topic content", response.content)
@@ -56,7 +58,7 @@ class TestTopicViews(TestCase):
             'published': True,
             'author': self.admin_user.id
         })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful post
+        self.assertEqual(response.status_code, 302)
         new_topic = Topic.objects.get(slug='new-topic')
         self.assertEqual(new_topic.title, 'New Topic')
         self.assertEqual(new_topic.content, 'New Topic Content')
@@ -64,11 +66,13 @@ class TestTopicViews(TestCase):
 
     def test_user_can_create_comment(self):
         self.client.login(username="adminUser", password="adminPassword")
-        response = self.client.post(reverse('create_comment', args=[self.topic.pk]), {
-            'body': 'This is a test comment',
-            'parent': ''
-        })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful post
+        response = self.client.post(
+            reverse('create_comment', args=[self.topic.pk]), {
+                'body': 'This is a test comment',
+                'parent': ''
+            }
+        )
+        self.assertEqual(response.status_code, 302)
         new_comment = Comment.objects.get(body='This is a test comment')
         self.assertEqual(new_comment.body, 'This is a test comment')
         self.assertEqual(new_comment.author, self.admin_user)
@@ -81,10 +85,12 @@ class TestTopicViews(TestCase):
             author=self.admin_user,
             topic=self.topic
         )
-        response = self.client.post(reverse('edit_comment', args=[comment.pk]), {
-            'body': 'Edited comment'
-        })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful post
+        response = self.client.post(
+            reverse('edit_comment', args=[comment.pk]), {
+                'body': 'Edited comment'
+            }
+        )
+        self.assertEqual(response.status_code, 302)
         edited_comment = Comment.objects.get(pk=comment.pk)
         self.assertEqual(edited_comment.body, 'Edited comment')
 
@@ -95,23 +101,34 @@ class TestTopicViews(TestCase):
             author=self.admin_user,
             topic=self.topic
         )
-        response = self.client.post(reverse('delete_comment', args=[comment.pk]))
-        self.assertEqual(response.status_code, 302)  # Redirect after successful post
+        response = self.client.post(
+            reverse('delete_comment', args=[comment.pk])
+        )
+        self.assertEqual(response.status_code, 302)
         with self.assertRaises(Comment.DoesNotExist):
             Comment.objects.get(pk=comment.pk)
 
     def test_user_can_like_and_unlike_topic(self):
         self.client.login(username="adminUser", password="adminPassword")
-        response = self.client.post(reverse('like_topic', args=[self.topic.pk]))
+        response = self.client.post(reverse('like_topic',
+             args=[self.topic.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(self.topic.likes.filter(pk=self.admin_user.pk).exists())
-        response = self.client.post(reverse('like_topic', args=[self.topic.pk]))
+        self.assertTrue(self.topic.likes.filter(pk=self.admin_user.pk)
+            .exists())
+        response = self.client.post(reverse('like_topic',
+             args=[self.topic.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertFalse(self.topic.likes.filter(pk=self.admin_user.pk).exists())
+        self.assertFalse(self.topic.likes.filter(pk=self.admin_user.pk)
+            .exists())
 
     def test_redirect_to_login_if_not_logged_in(self):
-        response = self.client.get(reverse('topic_detail', args=['topic-title']))
-        self.assertRedirects(response, f"{reverse('login')}?next={reverse('topic_detail', args=['topic-title'])}")
+        response = self.client.get(reverse('topic_detail',
+             args=['topic-title']))
+        self.assertRedirects(
+            response,
+            f"{reverse('login')}?next={reverse('topic_detail',
+             args=['topic-title'])}"
+        )
 
     def test_comment_thread_display(self):
         self.client.login(username="adminUser", password="adminPassword")
@@ -126,7 +143,8 @@ class TestTopicViews(TestCase):
             topic=self.topic,
             parent=parent_comment
         )
-        response = self.client.get(reverse('topic_detail', args=['topic-title']))
+        response = self.client.get(reverse('topic_detail',
+             args=['topic-title']))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Parent comment", response.content)
         self.assertIn(b"Reply comment", response.content)

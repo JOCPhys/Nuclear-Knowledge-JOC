@@ -5,6 +5,7 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
+
 class Topic(models.Model):
     CATEGORY_OPTION = [
         ('nuclear_facilities', 'Nuclear Facilities'),
@@ -23,10 +24,18 @@ class Topic(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(User, related_name='liked_topics', blank=True)
-    image = CloudinaryField('image', blank=True, null=True, default='placeholder.png')
-    alt_description = models.CharField(max_length=255, blank=True, null=True)
-    category = models.CharField(max_length=200, choices=CATEGORY_OPTION, default='nuclear_facilities')
+    likes = models.ManyToManyField(
+        User, related_name='liked_topics', blank=True
+    )
+    image = CloudinaryField(
+        'image', blank=True, null=True, default='placeholder.png'
+    )
+    alt_description = models.CharField(
+        max_length=255, blank=True, null=True
+    )
+    category = models.CharField(
+        max_length=200, choices=CATEGORY_OPTION, default='nuclear_facilities'
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -38,12 +47,17 @@ class Topic(models.Model):
 
 
 class Comment(models.Model):
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='comments')
+    topic = models.ForeignKey(
+        Topic, on_delete=models.CASCADE, related_name='comments'
+    )
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+    parent = models.ForeignKey(
+        'self', null=True, blank=True, on_delete=models.CASCADE,
+        related_name='replies'
+    )
 
     class Meta:
         ordering = ["-created_at"]

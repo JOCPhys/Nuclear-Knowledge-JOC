@@ -4,6 +4,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from django.utils.html import format_html
 from .models import Topic, Comment
 
+
 @admin.register(Topic)
 class TopicAdmin(SummernoteModelAdmin):
     class Media:
@@ -11,7 +12,8 @@ class TopicAdmin(SummernoteModelAdmin):
             'all': (staticfiles_storage.url('css/admin.css'),)
         }
 
-    list_display = ('title', 'slug', 'excerpt', 'created_at', 'updated_at', 'published')
+    list_display = ('title', 'slug', 'excerpt', 'created_at', 'updated_at',
+                    'published')
     search_fields = ['title']
     list_filter = ('published',)
     prepopulated_fields = {'slug': ('title',)}
@@ -23,10 +25,10 @@ class TopicAdmin(SummernoteModelAdmin):
         queryset.update(published=True)
     approve_topics.short_description = "Approve selected topics"
 
-
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
-        extra_context['unpublished_count'] = Topic.objects.filter(published=False).count()
+        extra_context['unpublished_count'] = Topic.objects.filter
+        (published=False).count()
         return super().changelist_view(request, extra_context=extra_context)
 
 
@@ -36,7 +38,3 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ['body']
     list_filter = ('created_at',)
     date_hierarchy = 'created_at'
-
-
-
-    

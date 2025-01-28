@@ -366,7 +366,7 @@ The generated test logic demonstrated a basic understanding of the application's
 In addition to GitHub Copilot, other AI tools were leveraged in much lesser forms:
   - Perplexity: Used for generic questions regarding feature planning and implementation, providing valuable insights and information.
   - Microsoft Copilot: Assisted in generating user stories and blog content based on key information provided by myself.
-  - ChatGPT DALL·E: Used to create custom images, including the landing page masthead, enhancing the visual appeal of the application.
+  - ChatGPT DALL·E: Used to create custom images, including the landing page masthead, enhancing the visual appeal of the application. However due to a daily 'image creation limit' the images were developed in stages. 
   - DeepSeek: Trialed for its excellent insights into processes applied to problems. However, it was often unavailable due to high traffic.
 
 - Reflection on AI Tools
@@ -447,12 +447,34 @@ The home (landing) page had some initial syntax errors which were identified and
 
    ### Python validation TO DO ######
 [CI Python Linter](https://pep8ci.herokuapp.com/#) was used to validate the python files I created or edited myself.
+
+## PEP8CI Python Linter Results
+
+| File Path | Description | PEP8CI Python Linter Result (after errors corrected)
+|-----------|-------------|-----------------------------|
+| `manage.py` | Project management script | E501 | all clear
+| `blog/__init__.py` | Blog app initialization | all clear 
+| `blog/admin.py` | Blog app admin configuration | all clear |
+| `blog/apps.py` | Blog app configuration | all clear |
+| `blog/forms.py` | Blog app forms | all clear|
+| `blog/models.py` | Blog app models | all clear |
+| `blog/urls.py` | Blog app URL configuration | |
+| `blog/views.py` | Blog app views | all clear |
+| `blog/test_forms.py` | Blog app form tests | all clear |
+| `blog/test_views.py` | Blog app view tests | |
+| `nuclear_knowledge/__init__.py` | Nuclear Knowledge app initialization | |
+| `nuclear_knowledge/settings.py` | Nuclear Knowledge app settings | |
+| `nuclear_knowledge/urls.py` | Nuclear Knowledge app URL configuration | |
+| `nuclear_knowledge/wsgi.py` | Nuclear Knowledge app WSGI configuration | |
+| `env.py` | Environment configuration | |
   
 
-## Lighthouse scores via Chrome dev tools 
-![lighthouse](https://github.com/user-attachments/assets/ad97e67e-3d28-4c94-a847-d2c011aeac67)
+## Lighthouse scores from Heroku deployed app via Chrome dev tools 
+![lighthouse](readme.docs/Lighthouse_testing-result.png)
 
-The performance score is low due to the amount of images used but all the images have been compressed.
+The performance score is acceptable. 
+ - Accesibility 88% (close to the 90% breakpoint!) was due to an insufficent contrast ratio of the heading text in the masthead image (which can be improved in future sprint) although it passed 10 audits. 
+  - Performance 89% (close to the 90% breakpoint!) was due to the size of some images (which can be reduced in future sprints). 18 audits passed. 
 
   
 
