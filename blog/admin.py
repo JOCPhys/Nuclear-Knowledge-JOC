@@ -12,8 +12,9 @@ class TopicAdmin(SummernoteModelAdmin):
             'all': (staticfiles_storage.url('css/admin.css'),)
         }
 
-    list_display = ('title', 'slug', 'excerpt', 'created_at', 'updated_at',
-                    'published')
+    list_display = (
+        'title', 'slug', 'excerpt', 'created_at', 'updated_at', 'published'
+    )
     search_fields = ['title']
     list_filter = ('published',)
     prepopulated_fields = {'slug': ('title',)}
@@ -27,8 +28,9 @@ class TopicAdmin(SummernoteModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
-        extra_context['unpublished_count'] = Topic.objects.filter
-        (published=False).count()
+        Topic.objects.filter(
+            published=False
+        ).count()
         return super().changelist_view(request, extra_context=extra_context)
 
 
