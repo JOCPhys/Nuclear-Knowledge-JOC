@@ -12,7 +12,7 @@ link to Heroku (live page)
 > [View live project here](https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/)
 
 Github link 
-> [view Github repo here](https://jocphys-nuclearknowledg-k332bmo63z4.ws.codeinstitute-ide.net)
+> [view Github repo here](https://github.com/JOCPhys/Nuclear-Knowledge-JOC)
 > 
 > This is an information resource to share and create blog posts about the many aspects of Nuclear physics. Users can read and comment and reply on each post so that they can share their thoughts and ideas and feel part of the wider scientific community.
 ---
