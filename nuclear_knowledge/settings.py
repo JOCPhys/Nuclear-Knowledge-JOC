@@ -27,10 +27,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com', 'nuclear-knowledge-joc.herokuapp.com', '*']
+ALLOWED_HOSTS = [
+    '127.0.0.1', 'localhost', '.herokuapp.com',
+    'nuclear-knowledge-joc.herokuapp.com', '*'
+]
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-jocphys-nuclearknowledg-k332bmo63z4.ws.codeinstitute-ide.net']
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-jocphys-nuclearknowledg-k332bmo63z4.ws.codeinstitute-ide.net'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -99,16 +103,20 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 

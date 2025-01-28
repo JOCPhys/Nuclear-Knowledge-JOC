@@ -31,8 +31,9 @@ class TestTopicViews(TestCase):
 
     def test_render_topic_detail_page_with_comment_form(self):
         self.client.login(username="adminUser", password="adminPassword")
-        response = self.client.get(reverse('topic_detail',
-            args=['topic-title']))
+        response = self.client.get(
+            reverse('topic_detail', args=['topic-title'])
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Topic title", response.content)
         self.assertIn(b"Topic content", response.content)
@@ -110,24 +111,29 @@ class TestTopicViews(TestCase):
 
     def test_user_can_like_and_unlike_topic(self):
         self.client.login(username="adminUser", password="adminPassword")
-        response = self.client.post(reverse('like_topic',
-             args=[self.topic.pk]))
+        response = self.client.post(
+            reverse('like_topic', args=[self.topic.pk])
+        )
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(self.topic.likes.filter(pk=self.admin_user.pk)
-            .exists())
-        response = self.client.post(reverse('like_topic',
-             args=[self.topic.pk]))
+        self.assertTrue(
+            self.topic.likes.filter(pk=self.admin_user.pk).exists()
+        )
+        response = self.client.post(
+            reverse('like_topic', args=[self.topic.pk])
+        )
         self.assertEqual(response.status_code, 200)
-        self.assertFalse(self.topic.likes.filter(pk=self.admin_user.pk)
-            .exists())
+        self.assertFalse(
+            self.topic.likes.filter(pk=self.admin_user.pk).exists()
+        )
 
     def test_redirect_to_login_if_not_logged_in(self):
-        response = self.client.get(reverse('topic_detail',
-             args=['topic-title']))
+        response = self.client.get(
+            reverse('topic_detail', args=['topic-title'])
+        )
         self.assertRedirects(
             response,
-            f"{reverse('login')}?next={reverse('topic_detail',
-             args=['topic-title'])}"
+            f"{reverse('login')}?next={
+                reverse('topic_detail', args=['topic-title'])}"
         )
 
     def test_comment_thread_display(self):
@@ -143,8 +149,9 @@ class TestTopicViews(TestCase):
             topic=self.topic,
             parent=parent_comment
         )
-        response = self.client.get(reverse('topic_detail',
-             args=['topic-title']))
+        response = self.client.get(
+            reverse('topic_detail', args=['topic-title'])
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Parent comment", response.content)
         self.assertIn(b"Reply comment", response.content)
