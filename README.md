@@ -170,66 +170,56 @@ This user story also contributed towards the CRUD functionality and was tested t
 
  ---
 
-## WEBSITE FEATURES TO COMPLETE######
+## WEBSITE FEATURES 
 
 
   **MAIN VIEW**
   <details open>
-  <summary>landing page</summary
-  ![home-page](https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/)
+  <summary>landing page</summary>
 
+  ![home-page](readme.docs/landing_page.png)
 
   </details>
   Users arrive directly on the landing page which outlines the 6 categories of topics available immediately rather than requiring them to log in or register before being able to see anything. 
   I felt it would draw people in more and encourage them to then sign-up in order to see more.
-  
 
 <br>
 
-**TOPIC CATEGORIES VIEW** TO COMPLETE IMAGE LINKS ######
+**USER AUTHENTICATION**
 <details open>
-  <summary>Example of a Topic Category page</summary
-  [topic-page] <img width="332" alt="Topic Page 'Fact or Fiction' view shows 6 topic blogs" src="readme.docs/fact_or_fiction_topic_page_view.png">
-  (https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/topic/fact-or-fiction/)
+<summary>login page</summary>
 
+**TOPIC CATEGORIES VIEW** 
+  <details open>
+  <summary>Login Page</summary>
+
+  ![login-page](readme.)
 
   </details>
-  Users choose one of 6 categories of topics available on the landing page. They will be required to sign-in/register to access these pages. Each of these pages has a minimum of 6 indivdual topic-blogs displayed as cards that each display the title of the topic, a relevant topic image, the author of the blog, an excerpt and an invite to comment. The number of likes and number of comments is displayed to entice other users to join.A click anywhere on the card will take the user to the topic blog detail.
+  Users choose one of 6 categories of topics available on the landing page. They will be required to sign-in/register to access these pages. Each of these pages has a minimum of 6 indivdual topic-blogs displayed as cards that each display the title of the topic, a relevant topic image, the author of the blog, an excerpt and an invite to comment. The number of likes and number of comments is displayed to entice other users to join. A click anywhere on the card will take the user to the topic blog detail.
   
-
 <br>
     
   **TOPIC-BLOG POST DETAIL VIEW**
   <details>
   <summary>The detailed view of each blog </summary>
-					     
-  ![post-detail](https://nuclear-knowledge-joc-5278fe0a2c03.herokuapp.com/topic/nuclear-power-in-space-exploration-an-overview/)
 
-  
+  ![post-detail](readme.docs/post_detail_page_view.png)
+
   </details>
-  Each topic blog post is shown with the image and the full detail of the post, displaying the number of 'likes' and the number of 'comments'. Users can reply to comments. Comments and replies can be edited. 
+  Each topic blog post is shown with the image and the full detail of the post, including the blog post content, author information, and creation date, and displays the number of 'likes' and the number of 'comments'. Users can add comments to the post and can reply to comments, with nested replies displayed. Comments are displayed as a thread with most recent first. Users can edit and delete their own comments and replies. 
 
   <br>
 
   **COMMENT FEATURE**
   <details>
   <summary>Comment box</summary>
-  ![comment](https://github.com/user-attachments/assets/cdf67ea2-1fad-410c-91e2-659a28432bde)
+  ![comment](readme.docs/comment_box_feature.png)
 
-	  
   </details>
-  Each blog post gives the user the option to add comments. They can also edit/delete commemts they have previously made. The 
- comments then appear colour coded so that the user can tell which have been approved by admin.
+  Each blog post gives the user the option to add comments. They can also edit/delete comments they have previously made. The comments do not require admin authorisation and will appear immediately. Repies can be made to comments. 
 
 
-  **SOCIAL LINKS FEATURE**
-
-
- ![footer](https://github.com/user-attachments/assets/57a79318-bd2f-423e-b015-3f59dea69dce)
-
-
-
-  The footer gives links to social sites and GitHub. The colour was chosen to match the header and fit in with the overall colour scheme.
 
 
 
